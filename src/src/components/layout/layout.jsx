@@ -35,7 +35,7 @@ const Layout = () => {
           <div
             className={`fifteen wide column ${styles.fullHeight} ${styles.container}`}
           >
-            <div class={`ui container ${styles.componentContainer}`}>
+            <div className={`ui container ${styles.componentContainer}`}>
               <Outlet></Outlet>
             </div>
           </div>

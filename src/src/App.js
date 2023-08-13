@@ -4,6 +4,7 @@ import Overview from './components/overview/overview';
 import Projects from './components/projects/projects';
 import Profile from './components/profile/profile';
 import Settings from './components/settings/settings';
+import NewProject from './components/new-project/new-project';
 import './App.css';
 
 function App() {
@@ -12,7 +13,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Overview />} />
-          <Route path="projects" element={<Projects />} />
+          <Route path="projects">
+            <Route index element={<Projects />} />
+            <Route path="new" element={<NewProject />} />
+          </Route>
           <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
         </Route>

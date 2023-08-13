@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./projects.module.css";
 
 const Projects = () => {
@@ -12,10 +13,10 @@ const Projects = () => {
       </div>
       <div className="row">
         <div className="four wide column">
-          <button class="ui active blue button">
+          <Link to="/projects/new" class="ui active blue button">
             <i class="icon cube"></i>
             New Project
-          </button>
+          </Link>
         </div>
         <div className="twelve wide column right aligned">
           <div class="ui icon input">
