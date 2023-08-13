@@ -26,9 +26,9 @@ const Layout = () => {
                 <Link to="/profile" className="item">
                   <i aria-hidden="true" className="user icon"></i>Profile
                 </Link>
-                <Link to="/settings" className="item">
+                {/* <Link to="/settings" className="item">
                   <i aria-hidden="true" className="cog icon"></i>Settings
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
