@@ -5,3 +5,8 @@
 .state {
     padding: 6px !important;
 }
+
+.breadcrumbContainer{
+    background-color: white;
+    padding: 6px;
+}
