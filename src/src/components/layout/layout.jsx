@@ -1,3 +1,4 @@
+import { Outlet } from "react-router-dom";
 import styles from "./layout.module.css";
 
 const Layout = () => {
@@ -38,7 +39,9 @@ const Layout = () => {
           </div>
           <div
             className={`fifteen wide column ${styles.fullHeight} ${styles.container}`}
-          ></div>
+          >
+            <Outlet></Outlet>
+          </div>
         </div>
       </div>
     </>
