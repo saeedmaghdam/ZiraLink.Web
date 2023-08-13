@@ -6,7 +6,8 @@ const Layout = () => {
     <>
       <header className="ui">
         <h1 className="prevent-highlight">
-          Zira <span className={styles.yellow}>Link</span> <span className={styles.small}>dashbboard</span>
+          Zira <span className={styles.yellow}>Link</span>{" "}
+          <span className={styles.small}>dashbboard</span>
         </h1>
       </header>
       <div className="ui grid noMarginTop noMarginBottom">
@@ -19,13 +20,13 @@ const Layout = () => {
                 <Link to="/" className="item">
                   <i aria-hidden="true" className="home icon"></i>Overview
                 </Link>
-                <Link to="/projects"  className="item">
+                <Link to="/projects" className="item">
                   <i aria-hidden="true" className="cube icon"></i>Projects
                 </Link>
-                <Link to="/profile"  className="item">
+                <Link to="/profile" className="item">
                   <i aria-hidden="true" className="user icon"></i>Profile
                 </Link>
-                <Link to="/settings"  className="item">
+                <Link to="/settings" className="item">
                   <i aria-hidden="true" className="cog icon"></i>Settings
                 </Link>
               </div>
@@ -34,7 +35,9 @@ const Layout = () => {
           <div
             className={`fifteen wide column ${styles.fullHeight} ${styles.container}`}
           >
-            <Outlet></Outlet>
+            <div class="ui container">
+              <Outlet></Outlet>
+            </div>
           </div>
         </div>
       </div>

@@ -2,7 +2,7 @@ import styles from "./projects.module.css";
 
 const Projects = () => {
   return (
-    <div class={`ui container ${styles.container}`}>
+    <>
       <button class="ui active blue button">
         <i class="icon cube"></i>
         New Project
@@ -143,7 +143,7 @@ const Projects = () => {
           ⟩
         </a>
       </div>
-    </div>
+    </>
   );
 };
 
