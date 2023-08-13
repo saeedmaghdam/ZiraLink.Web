@@ -36,6 +36,9 @@ const Projects = () => {
               <button class="circular ui icon button">
                 <i class="icon edit"></i>
               </button>
+              <button class="circular ui icon button">
+                <i class="icon file"></i>
+              </button>
             </td>
           </tr>
           <tr>
@@ -54,6 +57,9 @@ const Projects = () => {
               <button class="circular ui icon button">
                 <i class="icon edit"></i>
               </button>
+              <button class="circular ui icon button">
+                <i class="icon file"></i>
+              </button>
             </td>
           </tr>
           <tr>
@@ -69,8 +75,11 @@ const Projects = () => {
             </td>
             <td>August 13, 2023</td>
             <td>
-              <button class="circular ui icon button">
+            <button class="circular ui icon button">
                 <i class="icon edit"></i>
+              </button>
+              <button class="circular ui icon button">
+                <i class="icon file"></i>
               </button>
             </td>
           </tr>

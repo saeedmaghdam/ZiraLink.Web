@@ -22,9 +22,6 @@ const Layout = () => {
                 <Link to="/projects"  className="item">
                   <i aria-hidden="true" className="cube icon"></i>Projects
                 </Link>
-                <Link to="/reports"  className="item">
-                  <i aria-hidden="true" className="file alternate icon"></i>Reports
-                </Link>
                 <Link to="/profile"  className="item">
                   <i aria-hidden="true" className="user icon"></i>Profile
                 </Link>
