@@ -4,7 +4,7 @@ const Projects = () => {
   return (
     <div className="ui grid">
       <div className="row">
-        <div className={`sixteen wide column ${styles.breadcrumbContainer}`}>
+        <div className="sixteen wide column">
           <div class="ui breadcrumb">
             <div class="active section">Projects</div>
           </div>
@@ -121,7 +121,7 @@ const Projects = () => {
           <div
             aria-label="Pagination Navigation"
             role="navigation"
-            class="ui pagination menu"
+            class="ui pagination pointing secondary menu"
           >
             <a
               aria-current="false"

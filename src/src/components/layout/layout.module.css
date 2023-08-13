@@ -28,6 +28,12 @@ header h1 .small {
   padding-top: 75px;
 }
 
+.componentContainer {
+    background: #f1f1f1;
+    padding: 20px;
+    border-radius: 7px;
+}
+
 .menu * {
   padding-right: 0 !important;
 }
