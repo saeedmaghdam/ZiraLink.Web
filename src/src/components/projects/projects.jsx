@@ -36,9 +36,9 @@ const Projects = () => {
                 <th>Title</th>
                 <th>Domain</th>
                 <th>Username</th>
-                <th>State</th>
-                <th>Update Date</th>
                 <th>Full Name</th>
+                <th>Update Date</th>
+                <th>State</th>
                 <th></th>
               </tr>
             </thead>
@@ -51,12 +51,12 @@ const Projects = () => {
                 </td>
                 <td>saeedmaghdam</td>
                 <td>Saeed Aghdam</td>
+                <td>August 13, 2023</td>
                 <td>
                   <span className={`ui green message ${styles.state}`}>
                     Active
                   </span>
                 </td>
-                <td>August 13, 2023</td>
                 <td>
                   <button class="circular ui icon button">
                     <i class="icon edit"></i>
@@ -74,12 +74,12 @@ const Projects = () => {
                 </td>
                 <td>saeedmaghdam</td>
                 <td>Saeed Aghdam</td>
+                <td>August 13, 2023</td>
                 <td>
                   <span className={`ui green message ${styles.state}`}>
                     Active
                   </span>
                 </td>
-                <td>August 13, 2023</td>
                 <td>
                   <button class="circular ui icon button">
                     <i class="icon edit"></i>
@@ -97,12 +97,12 @@ const Projects = () => {
                 </td>
                 <td>saeedmaghdam</td>
                 <td>Saeed Aghdam</td>
+                <td>August 13, 2023</td>
                 <td>
                   <span className={`ui red message ${styles.state}`}>
                     Inactive
                   </span>
                 </td>
-                <td>August 13, 2023</td>
                 <td>
                   <button class="circular ui icon button">
                     <i class="icon edit"></i>
