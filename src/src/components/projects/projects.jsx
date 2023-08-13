@@ -92,8 +92,7 @@ const Projects = () => {
               <tr>
                 <td>antaeus.md.api</td>
                 <td>
-                  <span className="bold">antaeus-md-api</span>
-                  <span className={styles.gray}>.zira.aghdam.nl</span>
+                  <span className="bold">md.antaeusproject.com</span>
                 </td>
                 <td>saeedmaghdam</td>
                 <td>Saeed Aghdam</td>
