@@ -25,6 +25,7 @@ header h1 .small {
 
 .container {
   background-color: #1b1c1df5;
+  padding-top: 75px;
 }
 
 .menu * {
