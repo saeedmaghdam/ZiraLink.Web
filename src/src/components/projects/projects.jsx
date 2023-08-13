@@ -62,9 +62,9 @@ const Projects = () => {
                   <Link to="/projects/update/1" class="circular ui icon button">
                     <i class="icon edit"></i>
                   </Link>
-                  <button class="circular ui icon button">
+                  {/* <button class="circular ui icon button">
                     <i class="icon file"></i>
-                  </button>
+                  </button> */}
                 </td>
               </tr>
               <tr>
@@ -85,9 +85,9 @@ const Projects = () => {
                   <Link to="/projects/update/2" class="circular ui icon button">
                     <i class="icon edit"></i>
                   </Link>
-                  <button class="circular ui icon button">
+                  {/* <button class="circular ui icon button">
                     <i class="icon file"></i>
-                  </button>
+                  </button> */}
                 </td>
               </tr>
               <tr>
@@ -107,9 +107,9 @@ const Projects = () => {
                   <Link to="/projects/update/2" class="circular ui icon button">
                     <i class="icon edit"></i>
                   </Link>
-                  <button class="circular ui icon button">
+                  {/* <button class="circular ui icon button">
                     <i class="icon file"></i>
-                  </button>
+                  </button> */}
                 </td>
               </tr>
             </tbody>
