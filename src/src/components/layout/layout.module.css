@@ -1,0 +1,32 @@
+header {
+  height: 45px;
+  background-color: #1b1c1d;
+}
+
+header h1 {
+  color: white;
+  margin-left: 10px;
+  padding-top: 0px;
+  font-size: 34px;
+  cursor: default;
+}
+
+header h1 .yellow {
+    color: yellow;
+}
+
+header h1 .small {
+    font-size: 12px;
+}
+
+.fullHeight {
+  height: calc(100vh - 45px);
+}
+
+.container {
+  background-color: #1b1c1df5;
+}
+
+.menu * {
+  padding-right: 0 !important;
+}
