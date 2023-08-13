@@ -104,7 +104,7 @@ const Projects = () => {
                   </span>
                 </td>
                 <td>
-                  <Link to="/projects/update/2" class="circular ui icon button">
+                  <Link to="/projects/update/3" class="circular ui icon button">
                     <i class="icon edit"></i>
                   </Link>
                   {/* <button class="circular ui icon button">
@@ -116,7 +116,7 @@ const Projects = () => {
           </table>
         </div>
       </div>
-      <div className="row">
+      {/* <div className="row">
         <div className="sixteen wide column">
           <div
             aria-label="Pagination Navigation"
@@ -177,7 +177,7 @@ const Projects = () => {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
