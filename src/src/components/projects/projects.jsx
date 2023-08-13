@@ -16,7 +16,7 @@ const Projects = () => {
             <th>State</th>
             <th>Update Date</th>
             <th>Full Name</th>
-            <th>Actions</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
