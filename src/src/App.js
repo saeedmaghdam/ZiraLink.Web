@@ -1,6 +1,10 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/layout';
 import Overview from './components/overview/overview';
+import Projects from './components/projects/projects';
+import Reports from './components/reports/reports';
+import Profile from './components/profile/profile';
+import Settings from './components/settings/settings';
 import './App.css';
 
 function App() {
@@ -8,7 +12,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="" element={<Overview />} />
+          <Route index element={<Overview />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="reports" element={<Reports />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

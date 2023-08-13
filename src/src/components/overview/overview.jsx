@@ -1,5 +1,3 @@
-const Overview = () => {
-    return <h1>Overview</h1>
-}
+const Overview = () => <h1>Overview</h1>
 
 export default Overview;

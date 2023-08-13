@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import styles from "./layout.module.css";
 
 const Layout = () => {
@@ -16,24 +16,21 @@ const Layout = () => {
               <div
                 className={`ui inverted vertical labeled icon ui overlay centered wide animating visible sidebar menu fullWidth ${styles.menu}`}
               >
-                <a className="item">
+                <Link to="/" className="item">
                   <i aria-hidden="true" className="home icon"></i>Overview
-                </a>
-                <a className="item">
+                </Link>
+                <Link to="/projects"  className="item">
                   <i aria-hidden="true" className="cube icon"></i>Projects
-                </a>
-                <a className="item">
-                  <i aria-hidden="true" className="file alternate icon"></i>
-                  Reports
-                </a>
-
-                <a className="item">
+                </Link>
+                <Link to="/reports"  className="item">
+                  <i aria-hidden="true" className="file alternate icon"></i>Reports
+                </Link>
+                <Link to="/profile"  className="item">
                   <i aria-hidden="true" className="user icon"></i>Profile
-                </a>
-
-                <a className="item">
+                </Link>
+                <Link to="/settings"  className="item">
                   <i aria-hidden="true" className="cog icon"></i>Settings
-                </a>
+                </Link>
               </div>
             </div>
           </div>
