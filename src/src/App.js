@@ -1,9 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/layout';
-import Overview from './components/overview/overview';
 import Projects from './components/projects/projects';
 import Profile from './components/profile/profile';
-import Settings from './components/settings/settings';
 import NewProject from './components/new-project/new-project';
 import UpdateProject from './components/update-project/update-project';
 import './App.css';
@@ -13,14 +11,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Overview />} />
+          <Route index element={<Projects />} />
           <Route path="projects">
             <Route index element={<Projects />} />
             <Route path="new" element={<NewProject />} />
             <Route path="update/:id" element={<UpdateProject />} />
           </Route>
           <Route path="profile" element={<Profile />} />
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
         </Route>
       </Routes>
     </BrowserRouter>

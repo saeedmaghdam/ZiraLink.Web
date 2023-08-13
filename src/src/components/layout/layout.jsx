@@ -17,9 +17,9 @@ const Layout = () => {
               <div
                 className={`ui inverted vertical labeled icon ui overlay centered wide animating visible sidebar menu fullWidth ${styles.menu}`}
               >
-                <Link to="/" className="item">
+                {/* <Link to="/" className="item">
                   <i aria-hidden="true" className="home icon"></i>Overview
-                </Link>
+                </Link> */}
                 <Link to="/projects" className="item">
                   <i aria-hidden="true" className="cube icon"></i>Projects
                 </Link>
