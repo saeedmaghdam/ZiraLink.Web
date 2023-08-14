@@ -21,8 +21,8 @@ const UpdateProject = () => {
           </div>
         </div>
         <div className="one wide column right aligned">
-          <Link to="/projects" class="circular ui icon button">
-            <i class="icon close"></i>
+          <Link to="/projects" className="circular ui icon button">
+            <i className="icon close"></i>
           </Link>
         </div>
       </div>
@@ -39,7 +39,7 @@ const UpdateProject = () => {
                   type="radio"
                   name="radioGroup"
                   value="zira"
-                  onClick={onDomainTypeChanged}
+                  onChange={onDomainTypeChanged}
                   checked={domainType == "zira"}
                 />
                 <label>Zira's Subdomain</label>
@@ -51,7 +51,7 @@ const UpdateProject = () => {
                   type="radio"
                   name="radioGroup"
                   value="custom"
-                  onClick={onDomainTypeChanged}
+                  onChange={onDomainTypeChanged}
                   checked={domainType == "custom"}
                 />
                 <label>Custom Domain</label>

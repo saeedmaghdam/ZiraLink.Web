@@ -21,11 +21,11 @@ const Profile = () => {
           <form className="ui form">
             <div className="field">
               <label>Username</label>
-              <input placeholder="Username" disabled value={profile.preferred_username} />
+              <input placeholder="Username" disabled value={profile.preferred_username ?? ""} />
             </div>
             <div className="field">
               <label>Email</label>
-              <input placeholder="Email" disabled value={profile.email} />
+              <input placeholder="Email" disabled value={profile.email ?? ""} />
             </div>
             <div className="field">
               <label>Password</label>
