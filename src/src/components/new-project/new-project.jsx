@@ -1,10 +1,32 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import projectService from "../../services/project";
+import enums from "../../enums/domainType";
+import config from "../../config";
 
 const NewProject = () => {
-  const [domainType, setDomainType] = useState("zira");
+  const [domainType, setDomainType] = useState("default");
+  const [title, setTitle] = useState("");
+  const [domain, setDomain] = useState("");
+  const [internalUrl, setInternalUrl] = useState("");
 
   const onDomainTypeChanged = ($event) => setDomainType($event.target.value);
+
+  const onSubmitClicked = ($event) => {
+    $event.preventDefault();
+    
+    const request = projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl)
+    request.then(resp => resp.json())
+    .then(resp => {
+      if (resp.status == false){
+        alert(resp.errorMessage);
+        return;
+      }
+      window.location.href = `/projects`;
+    }).catch(err => {
+      alert(err);
+    });
+  }
 
   return (
     <div className="ui grid">
@@ -19,8 +41,8 @@ const NewProject = () => {
           </div>
         </div>
         <div className="one wide column right aligned">
-          <Link to="/projects" class="circular ui icon button">
-            <i class="icon close"></i>
+          <Link to="/projects" className="circular ui icon button">
+            <i className="icon close"></i>
           </Link>
         </div>
       </div>
@@ -29,16 +51,16 @@ const NewProject = () => {
           <form className="ui form">
             <div className="field">
               <label>Project Title</label>
-              <input placeholder="Project Title" />
+              <input placeholder="Project Title" value={title} onChange={$event => setTitle($event.target.value)} />
             </div>
             <div className="field">
               <div className="ui radio checkbox">
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="zira"
-                  onClick={onDomainTypeChanged}
-                  checked={domainType == "zira"}
+                  value="default"
+                  onChange={onDomainTypeChanged}
+                  checked={domainType == "default"}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -49,7 +71,7 @@ const NewProject = () => {
                   type="radio"
                   name="radioGroup"
                   value="custom"
-                  onClick={onDomainTypeChanged}
+                  onChange={onDomainTypeChanged}
                   checked={domainType == "custom"}
                 />
                 <label>Custom Domain</label>
@@ -66,14 +88,14 @@ const NewProject = () => {
             ) : (
               <div className="field">
                 <label>Domain</label>
-                <input placeholder="Domain" />
+                <input placeholder="Domain" domain={title} onChange={$event => setDomain($event.target.value)} />
               </div>
             )}
             <div className="field">
               <label>Internal Url</label>
-              <input placeholder="Internal Url" />
+              <input placeholder="Internal Url" value={internalUrl} onChange={$event => setInternalUrl($event.target.value)} />
             </div>
-            <button className="ui button" type="submit">
+            <button className="ui button" type="submit" onClick={onSubmitClicked}>
               Save
             </button>
           </form>
