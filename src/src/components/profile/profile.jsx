@@ -31,7 +31,7 @@ const Profile = () => {
               Save
             </button>
           </form>
-          <div class="ui divider"></div>
+          <div className="ui divider"></div>
           <form className="ui form">
             <div className="field">
               <label>Name</label>
