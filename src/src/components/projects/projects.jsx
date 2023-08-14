@@ -3,31 +3,48 @@ import styles from "./projects.module.css";
 import projectService from "../../services/project";
 import { useEffect, useState } from "react";
 import config from "../../config";
+import enums from "../../enums/domainType";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    projectService.get().then(resp => {
-      if (resp.status == 401) {
-        localStorage.removeItem("token");
-        window.localStorage.href = config.IDS_URL;
-        return;
-      }
-  
-      return resp.json()
-    })
-    .then(resp => {
-      if (resp.status == false){
-        alert(resp.errorMessage);
-        return;
-      }
-  
-      setProjects(resp.data);
-    }).catch(err => {
-      alert(err);
-    });
+    projectService
+      .get()
+      .then((resp) => {
+        if (resp.status == 401) {
+          localStorage.removeItem("token");
+          window.localStorage.href = config.IDS_URL;
+          return;
+        }
+
+        return resp.json();
+      })
+      .then((resp) => {
+        if (resp.status == false) {
+          alert(resp.errorMessage);
+          return;
+        }
+
+        setProjects(resp.data);
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }, []);
+
+  const dateFormat = (inp) => {
+    const date = new Date(inp);
+    const formattedDate = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric"
+    });
+
+    return formattedDate;
+  };
 
   return (
     <div className="ui grid">
@@ -71,35 +88,38 @@ const Projects = () => {
               </tr>
             </thead>
             <tbody>
-              {
-                projects.map(item => {
-                  return (
-                    <tr key={item.id}>
-                      <td>{item.title}</td>
-                      <td>
-                        <span className="bold">{item.domain}</span>
+              {projects.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>{item.title}</td>
+                    <td>
+                      <span className="bold">{item.domain}</span>
+                      {item.domainType == enums.domainType.default && (
                         <span className={styles.gray}>.zira.aghdam.nl</span>
-                      </td>
-                      <td>-</td>
-                      <td>-</td>
-                      <td>{item.dateUpdated}</td>
-                      <td>
-                        <span className={`ui green message ${styles.state}`}>
-                          Active
-                        </span>
-                      </td>
-                      <td>
-                        <Link to={`/projects/update/${item.id}`} className="circular ui icon button">
-                          <i className="icon edit"></i>
-                        </Link>
-                        {/* <button className="circular ui icon button">
+                      )}
+                    </td>
+                    <td>{item.customer.username}</td>
+                    <td>{item.customer.email}</td>
+                    <td>{dateFormat(item.dateUpdated)}</td>
+                    <td>
+                      <span className={`ui green message ${styles.state}`}>
+                        Active
+                      </span>
+                    </td>
+                    <td>
+                      <Link
+                        to={`/projects/update/${item.id}`}
+                        className="circular ui icon button"
+                      >
+                        <i className="icon edit"></i>
+                      </Link>
+                      {/* <button className="circular ui icon button">
                           <i className="icon file"></i>
                         </button> */}
-                      </td>
-                    </tr>
-                  )
-                })
-              }
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
