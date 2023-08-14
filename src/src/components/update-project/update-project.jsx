@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 const UpdateProject = () => {
-  const [domainType, setDomainType] = useState("zira");
+  const [domainType, setDomainType] = useState("default");
   const [projectTitle, setProjectTitle] = useState("");
   const { id } = useParams();
 
@@ -38,9 +38,9 @@ const UpdateProject = () => {
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="zira"
+                  value="default"
                   onChange={onDomainTypeChanged}
-                  checked={domainType == "zira"}
+                  checked={domainType == "default"}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -57,7 +57,7 @@ const UpdateProject = () => {
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType == "zira" ? (
+            {domainType == "default" ? (
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">

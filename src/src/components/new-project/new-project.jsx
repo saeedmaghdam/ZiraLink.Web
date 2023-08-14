@@ -77,7 +77,7 @@ const NewProject = () => {
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType == "zira" ? (
+            {domainType == "default" ? (
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">
