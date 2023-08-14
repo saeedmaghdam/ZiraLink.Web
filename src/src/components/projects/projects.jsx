@@ -74,7 +74,7 @@ const Projects = () => {
               {
                 projects.map(item => {
                   return (
-                    <tr>
+                    <tr key={item.id}>
                       <td>{item.title}</td>
                       <td>
                         <span className="bold">{item.domain}</span>
