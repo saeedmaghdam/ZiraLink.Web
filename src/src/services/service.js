@@ -4,7 +4,7 @@ import sessionService from "../session";
 const service = {
     get: (apiUrl) => {
         if (!sessionService.isAuthenticated) {
-            alert('Not authenticated');
+            window.location.href = `${config.BASE_URL}/bff/login`;
             return;
         }
 
@@ -18,7 +18,7 @@ const service = {
             }).then(resp => {
                 if (resp.status === 401) {
                     localStorage.removeItem("token");
-                    alert("Not authorized");
+                    window.location.href = `${config.BASE_URL}/bff/login`;
                 } else {
                     return resp.json() ;
                 }
@@ -34,7 +34,7 @@ const service = {
     },
     post: (apiUrl, object) => {
         if (!sessionService.isAuthenticated) {
-            alert('Not authenticated');
+            window.location.href = `${config.BASE_URL}/bff/login`;
             return;
         }
 
@@ -50,7 +50,7 @@ const service = {
             }).then(resp => {
                 if (resp.status === 401) {
                     localStorage.removeItem("token");
-                    alert("Not authorized");
+                    window.location.href = `${config.BASE_URL}/bff/login`;
                 } else {
                     return resp.json() ;
                 }
@@ -66,7 +66,7 @@ const service = {
     },
     patch: (apiUrl, object) => {
         if (!sessionService.isAuthenticated) {
-            alert('Not authenticated');
+            window.location.href = `${config.BASE_URL}/bff/login`;
             return;
         }
 
@@ -82,7 +82,7 @@ const service = {
             }).then(resp => {
                 if (resp.status === 401) {
                     localStorage.removeItem("token");
-                    alert("Not authorized");
+                    window.location.href = `${config.BASE_URL}/bff/login`;
                 } else {
                     return resp.json() ;
                 }

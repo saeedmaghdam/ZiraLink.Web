@@ -1,4 +1,5 @@
 import config from "../config";
+import notify from "./notify";
 import service from "./service";
 
 const customerService = {
@@ -10,7 +11,7 @@ const customerService = {
     changePassword: (currentPassword, password, confirmPassword) => {
         if (password != confirmPassword)
         {
-            alert("Password does not match");
+            notify.info("Password does not match");
             return;
         }
 

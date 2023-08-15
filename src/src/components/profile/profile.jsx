@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import customerService from "../../services/customerService";
+import notify from "../../services/notify";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
@@ -21,12 +23,14 @@ const Profile = () => {
   
   const onUpdateProfileClicked = ($event) => {
     $event.preventDefault();
-    customerService.updateProfile(name, family).then((resp) => alert("Profile updated"));
+    customerService.updateProfile(name, family).then((resp) => notify.success("Profile updated"));
   }
 
   const onChangePasswordClicked = ($event) => {
     $event.preventDefault();
-    customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => alert("Password changed"));
+    customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => {
+      notify.success("Password changed");
+    });
   }
 
   return (

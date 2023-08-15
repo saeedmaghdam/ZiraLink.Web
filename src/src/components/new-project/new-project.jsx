@@ -1,19 +1,24 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import projectService from "../../services/projectService";
 import enums from "../../enums/domainType";
+import notify from "../../services/notify";
 
 const NewProject = () => {
   const [domainType, setDomainType] = useState("default");
   const [title, setTitle] = useState("");
   const [domain, setDomain] = useState("");
   const [internalUrl, setInternalUrl] = useState("");
+  const navigate = useNavigate();
 
   const onDomainTypeChanged = ($event) => setDomainType($event.target.value);
 
   const onSubmitClicked = ($event) => {
     $event.preventDefault();
-    projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl).then(() => window.location.href = `/projects`);
+    projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl).then(() => {
+      notify.success("Project added successfully");
+      navigate("/projects");
+    });
   }
 
   return (
