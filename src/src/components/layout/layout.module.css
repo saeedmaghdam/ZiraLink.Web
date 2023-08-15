@@ -12,11 +12,11 @@ header h1 {
 }
 
 header h1 .yellow {
-    color: yellow;
+  color: yellow;
 }
 
 header h1 .small {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .fullHeight {
@@ -29,11 +29,16 @@ header h1 .small {
 }
 
 .componentContainer {
-    background: #f1f1f1;
-    padding: 20px;
-    border-radius: 7px;
+  background: #f1f1f1;
+  padding: 20px;
+  border-radius: 7px;
 }
 
 .menu * {
   padding-right: 0 !important;
+}
+
+.signOut {
+  display: inline-block !important;
+  margin-top: 4px !important;
 }

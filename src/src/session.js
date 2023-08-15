@@ -1,4 +1,4 @@
-const session = {
+const sessionService = {
     isAuthenticated: (() => { 
     const token = localStorage.getItem("token");
     if (token == undefined)
@@ -9,4 +9,4 @@ const session = {
 }
 
 
-export default session;
+export default sessionService;

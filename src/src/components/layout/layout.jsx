@@ -1,14 +1,26 @@
 import { Link, Outlet } from "react-router-dom";
 import styles from "./layout.module.css";
+import customerService from "../../services/customerService";
 
 const Layout = () => {
   return (
     <>
       <header className="ui">
-        <h1 className="prevent-highlight">
-          Zira <span className={styles.yellow}>Link</span>{" "}
-          <span className={styles.small}>dashbboard</span>
-        </h1>
+        <div className="ui grid noMarginTop noMargin">
+          <div className="row noPadding noMargin">
+            <div className={`eight wide column`}>
+              <h1 className="prevent-highlight">
+                Zira <span className={styles.yellow}>Link</span>{" "}
+                <span className={styles.small}>dashbboard</span>
+              </h1>
+            </div>
+            <div className={`eight wide column right aligned`}>
+              <button className={`circular ui icon button ${styles.signOut}`} onClick={() => customerService.signOut() }>
+                <i className="icon sign-out"></i>
+              </button>
+            </div>
+          </div>
+        </div>
       </header>
       <div className="ui grid noMarginTop noMarginBottom">
         <div className="row noPadding">

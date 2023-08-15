@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import projectService from "../../services/project";
+import projectService from "../../services/projectService";
 import enums from "../../enums/domainType";
-import config from "../../config";
 
 const NewProject = () => {
   const [domainType, setDomainType] = useState("default");
@@ -14,18 +13,7 @@ const NewProject = () => {
 
   const onSubmitClicked = ($event) => {
     $event.preventDefault();
-    
-    const request = projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl)
-    request.then(resp => resp.json())
-    .then(resp => {
-      if (resp.status == false){
-        alert(resp.errorMessage);
-        return;
-      }
-      window.location.href = `/projects`;
-    }).catch(err => {
-      alert(err);
-    });
+    projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl).then(() => window.location.href = `/projects`);
   }
 
   return (

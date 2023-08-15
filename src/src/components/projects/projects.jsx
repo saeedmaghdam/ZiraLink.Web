@@ -1,35 +1,16 @@
 import { Link } from "react-router-dom";
-import styles from "./projects.module.css";
-import projectService from "../../services/project";
+import projectService from "../../services/projectService";
 import { useEffect, useState } from "react";
-import config from "../../config";
 import enums from "../../enums/domainType";
+import styles from "./projects.module.css";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     projectService
-      .get()
-      .then((resp) => {
-        if (resp.status == 401) {
-          localStorage.removeItem("token");
-          window.localStorage.href = config.IDS_URL;
-          return;
-        }
-
-        return resp.json();
-      })
-      .then((resp) => {
-        if (resp.status == false) {
-          alert(resp.errorMessage);
-          return;
-        }
-
+      .get().then(resp => {
         setProjects(resp.data);
-      })
-      .catch((err) => {
-        alert(err);
       });
   }, []);
 

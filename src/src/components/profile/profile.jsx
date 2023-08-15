@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import customerService from "../../services/customer";
-import config from "../../config";
+import customerService from "../../services/customerService";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
@@ -13,79 +12,21 @@ const Profile = () => {
 
   useEffect(() => {
     customerService.getProfile().then(resp => {
-      if (resp.status == 401) {
-        localStorage.removeItem("token");
-        window.localStorage.href = config.IDS_URL;
-        return;
-      }
-  
-      return resp.json()
-    })
-    .then(resp => {
-      if (resp.status == false){
-        alert(resp.errorMessage);
-        return;
-      }
-
       setUsername(resp.data.username);
       setEmail(resp.data.email);
       setName(resp.data.name);
       setFamily(resp.data.family);
-    }).catch(err => {
-      alert(err);
-    }).finally(() => {
-  });
+    });
   }, []);
   
   const onUpdateProfileClicked = ($event) => {
     $event.preventDefault();
-
-    customerService.updateProfile(name, family).then((resp) => {
-      if (resp.status == 401) {
-        localStorage.removeItem("token");
-        window.localStorage.href = config.IDS_URL;
-        return;
-      }
-
-      return resp.json();
-    })
-    .then((resp) => {
-      if (resp.status == false) {
-        alert(resp.errorMessage);
-        return;
-      }
-
-      console.log(resp);
-      alert("Profile updated");
-    })
-    .catch((err) => {
-      alert(err);
-    });
+    customerService.updateProfile(name, family).then((resp) => alert("Profile updated"));
   }
 
   const onChangePasswordClicked = ($event) => {
     $event.preventDefault();
-
-    customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => {
-      if (resp.status == 401) {
-        localStorage.removeItem("token");
-        window.localStorage.href = config.IDS_URL;
-        return;
-      }
-
-      return resp.json();
-    })
-    .then((resp) => {
-      if (resp.status == false) {
-        alert(resp.errorMessage);
-        return;
-      }
-
-      alert("Password changed");
-    })
-    .catch((err) => {
-      alert(err);
-    });
+    customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => alert("Password changed"));
   }
 
   return (
@@ -110,15 +51,15 @@ const Profile = () => {
             </div>
             <div className="field">
               <label>Current Password</label>
-              <input placeholder="Current Password" value={currentPassword} onChange={$event => setCurrentPassword($event.target.value)} />
+              <input type="password" placeholder="Current Password" value={currentPassword} onChange={$event => setCurrentPassword($event.target.value)} />
             </div>
             <div className="field">
               <label>Password</label>
-              <input placeholder="Password" value={password} onChange={$event => setPassword($event.target.value)} />
+              <input type="password" placeholder="Password" value={password} onChange={$event => setPassword($event.target.value)} />
             </div>
             <div className="field">
               <label>Confirm Password</label>
-              <input placeholder="Confirm Password" value={confirmPassword} onChange={$event => setConfirmPassword($event.target.value)} />
+              <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={$event => setConfirmPassword($event.target.value)} />
             </div>
             <button className="ui button" type="submit" onClick={onChangePasswordClicked}>
               Save
