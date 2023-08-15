@@ -7,23 +7,26 @@ import notify from "../../services/notify";
 import { Confirm } from "semantic-ui-react";
 
 const Projects = () => {
-  const [index, setIndex] = useState(0);
   const [projects, setProjects] = useState([]);
   const [confirmShown, setConfirmShown] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
   const handleConfirm = () => {
-    projectService.delete(productIdToDelete).then(resp => notify.success("Project successfully removed")).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
-    setIndex(index + 1);
+    projectService.delete(productIdToDelete).then(resp => {
+      getData();
+      notify.success("Project successfully removed");
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
     setConfirmShown(false);
   }
   const handleCancel = () => setConfirmShown(false);
 
-  useEffect(() => {
+  useEffect(() => getData(), []);
+
+  const getData = () => {
     projectService.get().then((resp) => {
       setProjects(resp.data);
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
-  }, [index]);
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
+  }
 
   const onDeleteClicked = (id) => {
     setProductIdToDelete(id);
