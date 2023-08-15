@@ -74,14 +74,14 @@ const NewProject = () => {
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">
-                  <input type="text" placeholder="Domain" />
+                  <input type="text" placeholder="Domain" value={domain} onChange={$event => setDomain($event.target.value)} />
                   <div className="ui label">.zira.aghdam.nl</div>
                 </div>
               </div>
             ) : (
               <div className="field">
                 <label>Domain</label>
-                <input placeholder="Domain" domain={title} onChange={$event => setDomain($event.target.value)} />
+                <input type="text" placeholder="Domain" value={domain} onChange={$event => setDomain($event.target.value)} />
               </div>
             )}
             <div className="field">

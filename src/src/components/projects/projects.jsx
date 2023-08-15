@@ -3,16 +3,32 @@ import projectService from "../../services/projectService";
 import { useEffect, useState } from "react";
 import enums from "../../enums/domainType";
 import styles from "./projects.module.css";
+import notify from "../../services/notify";
+import { Confirm } from "semantic-ui-react";
 
 const Projects = () => {
+  const [index, setIndex] = useState(0);
   const [projects, setProjects] = useState([]);
+  const [confirmShown, setConfirmShown] = useState(false);
+  const [productIdToDelete, setProductIdToDelete] = useState(0);
+
+  const handleConfirm = () => {
+    projectService.delete(productIdToDelete).then(resp => notify.success("Project successfully removed"));
+    setIndex(index + 1);
+    setConfirmShown(false);
+  }
+  const handleCancel = () => setConfirmShown(false);
 
   useEffect(() => {
-    projectService
-      .get().then(resp => {
-        setProjects(resp.data);
-      });
-  }, []);
+    projectService.get().then((resp) => {
+      setProjects(resp.data);
+    });
+  }, [index]);
+
+  const onDeleteClicked = (id) => {
+    setProductIdToDelete(id);
+    setConfirmShown(true);
+  }
 
   const dateFormat = (inp) => {
     const date = new Date(inp);
@@ -21,7 +37,7 @@ const Projects = () => {
       month: "long",
       day: "numeric",
       hour: "numeric",
-      minute: "numeric"
+      minute: "numeric",
     });
 
     return formattedDate;
@@ -94,6 +110,9 @@ const Projects = () => {
                       >
                         <i className="icon edit"></i>
                       </Link>
+                      <button className="circular ui icon button red" onClick={() => onDeleteClicked(item.id)}>
+                        <i className="icon delete"></i>
+                      </button>
                       {/* <button className="circular ui icon button">
                           <i className="icon file"></i>
                         </button> */}
@@ -167,6 +186,11 @@ const Projects = () => {
           </div>
         </div>
       </div> */}
+      <Confirm
+          open={confirmShown}
+          onCancel={handleCancel}
+          onConfirm={handleConfirm}
+        />
     </div>
   );
 };

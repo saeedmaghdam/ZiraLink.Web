@@ -7,7 +7,8 @@ const projectService = {
         "domainType": domainType,
         "domain": domain,
         "internalUrl": internalUrl
-    })
+    }),
+    delete: (id) => service.delete(`/Project/${id}`)
 }
 
 export default projectService;
