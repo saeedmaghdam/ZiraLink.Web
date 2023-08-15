@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import customerService from "../../services/customerService";
 import notify from "../../services/notify";
-import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [username, setUsername] = useState("");
@@ -18,19 +17,19 @@ const Profile = () => {
       setEmail(resp.data.email);
       setName(resp.data.name);
       setFamily(resp.data.family);
-    });
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
   }, []);
   
   const onUpdateProfileClicked = ($event) => {
     $event.preventDefault();
-    customerService.updateProfile(name, family).then((resp) => notify.success("Profile updated"));
+    customerService.updateProfile(name, family).then((resp) => notify.success("Profile updated")).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
   }
 
   const onChangePasswordClicked = ($event) => {
     $event.preventDefault();
     customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => {
       notify.success("Password changed");
-    });
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
   }
 
   return (

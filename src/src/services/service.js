@@ -16,12 +16,10 @@ const service = {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             }).then(resp => {
-                if (resp.status === 401) {
-                    localStorage.removeItem("token");
-                    window.location.href = `${config.BASE_URL}/bff/login`;
-                } else {
-                    return resp.json() ;
-                }
+                if (!isResponseValid(resp))
+                    reject();
+                
+                return resp.json();
             }).then(json => {
                 if (json === undefined)
                     reject(`Response is empty`);
@@ -48,12 +46,10 @@ const service = {
                 },
                 body: JSON.stringify(object)
             }).then(resp => {
-                if (resp.status === 401) {
-                    localStorage.removeItem("token");
-                    window.location.href = `${config.BASE_URL}/bff/login`;
-                } else {
-                    return resp.json() ;
-                }
+                if (!isResponseValid(resp))
+                    reject();
+                
+                return resp.json();
             }).then(json => {
                 if (json === undefined)
                     reject(`Response is empty`);
@@ -80,12 +76,10 @@ const service = {
                 },
                 body: JSON.stringify(object)
             }).then(resp => {
-                if (resp.status === 401) {
-                    localStorage.removeItem("token");
-                    window.location.href = `${config.BASE_URL}/bff/login`;
-                } else {
-                    return resp.json() ;
-                }
+                if (!isResponseValid(resp))
+                    reject();
+                
+                return resp.json();
             }).then(json => {
                 if (json === undefined)
                     reject(`Response is empty`);
@@ -110,12 +104,10 @@ const service = {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
                 }
             }).then(resp => {
-                if (resp.status === 401) {
-                    localStorage.removeItem("token");
-                    window.location.href = `${config.BASE_URL}/bff/login`;
-                } else {
-                    return resp.json() ;
-                }
+                if (!isResponseValid(resp))
+                    reject();
+                
+                return resp.json();
             }).then(json => {
                 if (json === undefined)
                     reject(`Response is empty`);
@@ -125,6 +117,17 @@ const service = {
                 reject(err);
             });
         })
+    }
+}
+
+const isResponseValid = (resp) => {
+    if (resp.status === 401) {
+        localStorage.removeItem("token");
+        window.location.href = `${config.BASE_URL}/bff/login`;
+    } else if (!resp.ok) {
+        return false;
+    } else {
+        return true;
     }
 }
 

@@ -13,7 +13,7 @@ const Projects = () => {
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
   const handleConfirm = () => {
-    projectService.delete(productIdToDelete).then(resp => notify.success("Project successfully removed"));
+    projectService.delete(productIdToDelete).then(resp => notify.success("Project successfully removed")).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
     setIndex(index + 1);
     setConfirmShown(false);
   }
@@ -22,7 +22,7 @@ const Projects = () => {
   useEffect(() => {
     projectService.get().then((resp) => {
       setProjects(resp.data);
-    });
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
   }, [index]);
 
   const onDeleteClicked = (id) => {

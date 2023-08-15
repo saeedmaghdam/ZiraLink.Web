@@ -18,7 +18,7 @@ const NewProject = () => {
     projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl).then(() => {
       notify.success("Project added successfully");
       navigate("/projects");
-    });
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
   }
 
   return (
