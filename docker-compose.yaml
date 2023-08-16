@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  web:
+    image: ziralink.web
+    container_name: ziralink-web
+    build:
+      context: ./
+      dockerfile: ./src/Dockerfile
+    ports:
+      - "3000:80"
