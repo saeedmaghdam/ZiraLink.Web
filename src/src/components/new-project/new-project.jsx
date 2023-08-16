@@ -20,7 +20,7 @@ const NewProject = () => {
     projectService
       .create(
         title,
-        domainType == "default"
+        domainType === "default"
           ? enums.domainType.default
           : enums.domainType.custom,
           domain,
@@ -36,7 +36,7 @@ const NewProject = () => {
   const onDomainProtocolClicked = ($event) => {
     $event.preventDefault();
 
-    if (domainProtocol == "http") setDomainProtocol("https");
+    if (domainProtocol === "http") setDomainProtocol("https");
     else setDomainProtocol("http");
   };
 
@@ -76,7 +76,7 @@ const NewProject = () => {
                   name="radioGroup"
                   value="default"
                   onChange={onDomainTypeChanged}
-                  checked={domainType == "default"}
+                  checked={domainType === "default"}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -88,12 +88,12 @@ const NewProject = () => {
                   name="radioGroup"
                   value="custom"
                   onChange={onDomainTypeChanged}
-                  checked={domainType == "custom"}
+                  checked={domainType === "custom"}
                 />
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType == "default" ? (
+            {domainType === "default" ? (
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">
@@ -122,7 +122,7 @@ const NewProject = () => {
               <div className="ui labeled input">
                 <button
                   className={`ui label toggle button ${
-                    domainProtocol == "https" && "green"
+                    domainProtocol === "https" && "green"
                   } ${styles.protocol}`}
                   onClick={onDomainProtocolClicked}
                 >

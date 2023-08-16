@@ -95,7 +95,7 @@ const Projects = () => {
                     <td>{item.title}</td>
                     <td>
                       <span className="bold">{item.domain}</span>
-                      {item.domainType == enums.domainType.default && (
+                      {item.domainType === enums.domainType.default && (
                         <span className={styles.gray}>.zira.aghdam.nl</span>
                       )}
                     </td>
@@ -104,8 +104,8 @@ const Projects = () => {
                     <td>{item.customer.email}</td>
                     <td>{dateFormat(item.dateUpdated)}</td>
                     <td>
-                      <span className={`ui message ${item.state == enums.projectState.active ? "green" : "yellow"} ${styles.state}`}>
-                        {item.state == enums.projectState.active ? "Active" : "Inactive"}
+                      <span className={`ui message ${item.state === enums.projectState.active ? "green" : "yellow"} ${styles.state}`}>
+                        {item.state === enums.projectState.active ? "Active" : "Inactive"}
                       </span>
                     </td>
                     <td>

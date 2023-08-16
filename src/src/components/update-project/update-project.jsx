@@ -21,7 +21,7 @@ const UpdateProject = () => {
       .getById(id)
       .then((resp) => {
         setDomainType(
-          resp.data.domainType == enums.domainType.default
+          resp.data.domainType === enums.domainType.default
             ? "default"
             : "custom"
         );
@@ -39,7 +39,7 @@ const UpdateProject = () => {
         setInternalUrl(internalUrl);
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
-  }, []);
+  }, [id]);
 
   const onDomainTypeChanged = ($event) => setDomainType($event.target.value);
 
@@ -51,7 +51,7 @@ const UpdateProject = () => {
   const onDomainProtocolClicked = ($event) => {
     $event.preventDefault();
 
-    if (domainProtocol == "http") setDomainProtocol("https");
+    if (domainProtocol === "http") setDomainProtocol("https");
     else setDomainProtocol("http");
   };
 
@@ -61,7 +61,7 @@ const UpdateProject = () => {
       .patch(
         id,
         title,
-        domainType == "default"
+        domainType === "default"
           ? enums.domainType.default
           : enums.domainType.custom,
           domain,
@@ -111,7 +111,7 @@ const UpdateProject = () => {
                   name="radioGroup"
                   value="default"
                   onChange={onDomainTypeChanged}
-                  checked={domainType == "default"}
+                  checked={domainType === "default"}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -123,12 +123,12 @@ const UpdateProject = () => {
                   name="radioGroup"
                   value="custom"
                   onChange={onDomainTypeChanged}
-                  checked={domainType == "custom"}
+                  checked={domainType === "custom"}
                 />
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType == "default" ? (
+            {domainType === "default" ? (
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">
@@ -157,7 +157,7 @@ const UpdateProject = () => {
               <div className="ui labeled input">
                 <button
                   className={`ui label toggle button ${
-                    domainProtocol == "https" && "green"
+                    domainProtocol === "https" && "green"
                   } ${styles.protocol}`}
                   onClick={onDomainProtocolClicked}
                 >

@@ -9,7 +9,7 @@ const customerService = {
         "family": family
     }),
     changePassword: (currentPassword, password, confirmPassword) => {
-        if (password != confirmPassword)
+        if (password !== confirmPassword)
         {
             notify.info("Password does not match");
             return;
