@@ -138,7 +138,7 @@ const UpdateProject = () => {
                     value={domain}
                     onChange={($event) => setDomain($event.target.value)}
                   />
-                  <div className="ui label">.zira.aghdam.nl</div>
+                  <div className="ui label">.app.ziralink.com:7001</div>
                 </div>
               </div>
             ) : (
