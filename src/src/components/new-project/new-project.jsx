@@ -1,13 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import projectService from "../../services/projectService";
-import enums from "../../enums/domainType";
+import enums from "../../enums/enums";
 import notify from "../../services/notify";
+import styles from "./new-project.module.css";
 
 const NewProject = () => {
   const [domainType, setDomainType] = useState("default");
   const [title, setTitle] = useState("");
   const [domain, setDomain] = useState("");
+  const [domainProtocol, setDomainProtocol] = useState("http");
   const [internalUrl, setInternalUrl] = useState("");
   const navigate = useNavigate();
 
@@ -15,11 +17,28 @@ const NewProject = () => {
 
   const onSubmitClicked = ($event) => {
     $event.preventDefault();
-    projectService.create(title, domainType == "default" ? enums.domainType.default : enums.domainType.custom, domain, internalUrl).then(() => {
-      notify.success("Project added successfully");
-      navigate("/projects");
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
-  }
+    projectService
+      .create(
+        title,
+        domainType == "default"
+          ? enums.domainType.default
+          : enums.domainType.custom,
+          domain,
+          `${domainProtocol}://${internalUrl}`,
+      )
+      .then(() => {
+        notify.success("Project added successfully");
+        navigate("/projects");
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
+  };
+
+  const onDomainProtocolClicked = ($event) => {
+    $event.preventDefault();
+
+    if (domainProtocol == "http") setDomainProtocol("https");
+    else setDomainProtocol("http");
+  };
 
   return (
     <div className="ui grid">
@@ -44,7 +63,11 @@ const NewProject = () => {
           <form className="ui form">
             <div className="field">
               <label>Project Title</label>
-              <input placeholder="Project Title" value={title} onChange={$event => setTitle($event.target.value)} />
+              <input
+                placeholder="Project Title"
+                value={title}
+                onChange={($event) => setTitle($event.target.value)}
+              />
             </div>
             <div className="field">
               <div className="ui radio checkbox">
@@ -74,21 +97,49 @@ const NewProject = () => {
               <div className="field">
                 <label>Domain</label>
                 <div className="ui right labeled input">
-                  <input type="text" placeholder="Domain" value={domain} onChange={$event => setDomain($event.target.value)} />
+                  <input
+                    type="text"
+                    placeholder="Domain"
+                    value={domain}
+                    onChange={($event) => setDomain($event.target.value)}
+                  />
                   <div className="ui label">.zira.aghdam.nl</div>
                 </div>
               </div>
             ) : (
               <div className="field">
                 <label>Domain</label>
-                <input type="text" placeholder="Domain" value={domain} onChange={$event => setDomain($event.target.value)} />
+                <input
+                  type="text"
+                  placeholder="Domain"
+                  value={domain}
+                  onChange={($event) => setDomain($event.target.value)}
+                />
               </div>
             )}
             <div className="field">
               <label>Internal Url</label>
-              <input placeholder="Internal Url" value={internalUrl} onChange={$event => setInternalUrl($event.target.value)} />
+              <div className="ui labeled input">
+                <button
+                  className={`ui label toggle button ${
+                    domainProtocol == "https" && "green"
+                  } ${styles.protocol}`}
+                  onClick={onDomainProtocolClicked}
+                >
+                  {domainProtocol}://
+                </button>
+                <input
+                  placeholder="Internal Url"
+                  value={internalUrl}
+                  onChange={($event) => setInternalUrl($event.target.value)}
+                />
+              </div>
             </div>
-            <button className="ui button" type="submit" onClick={onSubmitClicked}>
+            <button
+              className="ui button"
+              type="submit"
+              onClick={onSubmitClicked}
+            >
               Save
             </button>
           </form>

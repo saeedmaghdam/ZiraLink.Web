@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import projectService from "../../services/projectService";
 import { useEffect, useState } from "react";
-import enums from "../../enums/domainType";
+import enums from "../../enums/enums";
 import styles from "./projects.module.css";
 import notify from "../../services/notify";
 import { Confirm } from "semantic-ui-react";
@@ -15,7 +15,7 @@ const Projects = () => {
     projectService.delete(productIdToDelete).then(resp => {
       getData();
       notify.success("Project successfully removed");
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
+    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
     setConfirmShown(false);
   }
   const handleCancel = () => setConfirmShown(false);
@@ -80,6 +80,7 @@ const Projects = () => {
               <tr>
                 <th>Title</th>
                 <th>Domain</th>
+                <th>Internal Url</th>
                 <th>Username</th>
                 <th>Full Name</th>
                 <th>Update Date</th>
@@ -98,12 +99,13 @@ const Projects = () => {
                         <span className={styles.gray}>.zira.aghdam.nl</span>
                       )}
                     </td>
+                    <td>{item.internalUrl}</td>
                     <td>{item.customer.username}</td>
                     <td>{item.customer.email}</td>
                     <td>{dateFormat(item.dateUpdated)}</td>
                     <td>
-                      <span className={`ui green message ${styles.state}`}>
-                        Active
+                      <span className={`ui message ${item.state == enums.projectState.active ? "green" : "yellow"} ${styles.state}`}>
+                        {item.state == enums.projectState.active ? "Active" : "Inactive"}
                       </span>
                     </td>
                     <td>
