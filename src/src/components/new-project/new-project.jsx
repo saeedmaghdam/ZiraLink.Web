@@ -11,6 +11,7 @@ const NewProject = () => {
   const [domain, setDomain] = useState("");
   const [domainProtocol, setDomainProtocol] = useState("http");
   const [internalUrl, setInternalUrl] = useState("");
+  const [state, setState] = useState(true);
   const navigate = useNavigate();
 
   const onDomainTypeChanged = ($event) => setDomainType($event.target.value);
@@ -25,6 +26,7 @@ const NewProject = () => {
           : enums.domainType.custom,
           domain,
           `${domainProtocol}://${internalUrl}`,
+          state ? enums.projectState.active : enums.projectState.inactive
       )
       .then(() => {
         notify.success("Project added successfully");
@@ -38,6 +40,11 @@ const NewProject = () => {
 
     if (domainProtocol === "http") setDomainProtocol("https");
     else setDomainProtocol("http");
+  };
+
+  const onActiveClicked = ($event) => {
+    $event.preventDefault();
+    setState(!state);
   };
 
   return (
@@ -134,6 +141,14 @@ const NewProject = () => {
                   onChange={($event) => setInternalUrl($event.target.value)}
                 />
               </div>
+            </div>
+            <div className="field">
+              <button
+                className={`ui toggle button ${state && "green"}`}
+                onClick={onActiveClicked}
+              >
+                Active
+              </button>
             </div>
             <button
               className="ui button"
