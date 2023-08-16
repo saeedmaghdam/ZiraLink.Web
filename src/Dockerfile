@@ -22,8 +22,9 @@ EXPOSE 443
 
 RUN apk update && apk add ca-certificates grep netcat-openbsd iputils iproute2
 
-COPY ./certs/server.crt /usr/local/share/ca-certificates/ziralink.crt
-COPY ./certs/server.key /usr/local/share/ca-certificates/ziralink.key
+COPY ./certs/ca.crt /usr/local/share/ca-certificates/ca.crt
+COPY ./certs/server.crt /usr/local/share/ca-certificates/server.crt
+COPY ./certs/server.key /usr/local/share/ca-certificates/server.key
 RUN update-ca-certificates
 
 CMD ["nginx", "-g", "daemon off;"]
