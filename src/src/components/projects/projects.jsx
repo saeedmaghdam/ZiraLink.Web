@@ -12,26 +12,32 @@ const Projects = () => {
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
   const handleConfirm = () => {
-    projectService.delete(productIdToDelete).then(resp => {
-      getData();
-      notify.success("Project successfully removed");
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
+    projectService
+      .delete(productIdToDelete)
+      .then((resp) => {
+        getData();
+        notify.success("Project successfully removed");
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
     setConfirmShown(false);
-  }
+  };
   const handleCancel = () => setConfirmShown(false);
 
   useEffect(() => getData(), []);
 
   const getData = () => {
-    projectService.get().then((resp) => {
-      setProjects(resp.data);
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
-  }
+    projectService
+      .get()
+      .then((resp) => {
+        setProjects(resp.data);
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
+  };
 
   const onDeleteClicked = (id) => {
     setProductIdToDelete(id);
     setConfirmShown(true);
-  }
+  };
 
   const dateFormat = (inp) => {
     const date = new Date(inp);
@@ -45,6 +51,18 @@ const Projects = () => {
 
     return formattedDate;
   };
+
+  const getUrl = (input) => {
+    const colonIndex = input.indexOf(":");
+    let url = input;
+    if (colonIndex === -1) return <span>{input}</span>;
+    const schema = url.slice(0, colonIndex);
+    url = url.slice(colonIndex + 3);
+
+    return <>
+      <span className={schema === "http" ? "" : "green bold"}>{schema}://</span>{url}
+    </>
+  }
 
   return (
     <div className="ui grid">
@@ -99,13 +117,21 @@ const Projects = () => {
                         <span className={styles.gray}>.zira.aghdam.nl</span>
                       )}
                     </td>
-                    <td>{item.internalUrl}</td>
+                    <td>{getUrl(item.internalUrl)}</td>
                     <td>{item.customer.username}</td>
-                    <td>{item.customer.email}</td>
+                    <td>{item.customer.name} {item.customer.family}</td>
                     <td>{dateFormat(item.dateUpdated)}</td>
                     <td>
-                      <span className={`ui message ${item.state === enums.projectState.active ? "green" : "yellow"} ${styles.state}`}>
-                        {item.state === enums.projectState.active ? "Active" : "Inactive"}
+                      <span
+                        className={`ui message ${
+                          item.state === enums.projectState.active
+                            ? "green"
+                            : "yellow"
+                        } ${styles.state}`}
+                      >
+                        {item.state === enums.projectState.active
+                          ? "Active"
+                          : "Inactive"}
                       </span>
                     </td>
                     <td>
@@ -115,7 +141,10 @@ const Projects = () => {
                       >
                         <i className="icon edit"></i>
                       </Link>
-                      <button className="circular ui icon button red" onClick={() => onDeleteClicked(item.id)}>
+                      <button
+                        className="circular ui icon button red"
+                        onClick={() => onDeleteClicked(item.id)}
+                      >
                         <i className="icon delete"></i>
                       </button>
                       {/* <button className="circular ui icon button">
@@ -192,10 +221,10 @@ const Projects = () => {
         </div>
       </div> */}
       <Confirm
-          open={confirmShown}
-          onCancel={handleCancel}
-          onConfirm={handleConfirm}
-        />
+        open={confirmShown}
+        onCancel={handleCancel}
+        onConfirm={handleConfirm}
+      />
     </div>
   );
 };
