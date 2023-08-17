@@ -5,6 +5,7 @@ import enums from "../../enums/enums";
 import styles from "./projects.module.css";
 import notify from "../../services/notify";
 import { Confirm } from "semantic-ui-react";
+import config from "../../config";
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -112,10 +113,14 @@ const Projects = () => {
                   <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>
-                      <span className="bold">{item.domain}</span>
-                      {item.domainType === enums.domainType.default && (
-                        <span className={styles.gray}>.zira.aghdam.nl</span>
-                      )}
+                    {
+                        item.domainType === enums.domainType.default && 
+                        <a href={`https://${item.domain}${config.DEFAULT_DOMAIN}`} target="_blank" rel="nofollow"><span className="bold black">{item.domain}</span><span className={styles.gray}>{config.DEFAULT_DOMAIN}</span></a>
+                      }
+                      {
+                        item.domainType !== enums.domainType.default && 
+                        <a href={item.domain} target="_blank" rel="nofollow"><span className="black">{item.domain}</span></a>
+                      }
                     </td>
                     <td>{getUrl(item.internalUrl)}</td>
                     <td>{item.customer.username}</td>

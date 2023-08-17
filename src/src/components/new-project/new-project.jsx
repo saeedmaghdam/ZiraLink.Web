@@ -4,6 +4,7 @@ import projectService from "../../services/projectService";
 import enums from "../../enums/enums";
 import notify from "../../services/notify";
 import styles from "./new-project.module.css";
+import config from "../../config";
 
 const NewProject = () => {
   const [domainType, setDomainType] = useState("default");
@@ -110,7 +111,7 @@ const NewProject = () => {
                     value={domain}
                     onChange={($event) => setDomain($event.target.value)}
                   />
-                  <div className="ui label">.app.ziralink.com:7001</div>
+                  <div className="ui label">{config.DEFAULT_DOMAIN}</div>
                 </div>
               </div>
             ) : (
