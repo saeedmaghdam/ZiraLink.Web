@@ -1,7 +1,7 @@
 const config = {
-    BASE_URL: 'https://api.ziralink.com:6001',
-    IDS_URL: 'https://ids.ziralink.com:5001',
-    DEFAULT_DOMAIN: '.app.ziralink.com:7001'
+    BASE_URL: process.env.REACT_APP_BASE_URL,
+    IDS_URL: process.env.REACT_APP_IDS_URL,
+    DEFAULT_DOMAIN: process.env.REACT_APP_DEFAULT_DOMAIN
 };
 
 export default config;
