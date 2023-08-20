@@ -8,6 +8,7 @@ import SigninResult from "./components/signin-result/signin-result";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import 'react-toastify/dist/ReactToastify.css';
+import Downloads from "./components/downloads/downloads";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             </Route>
             <Route path="profile" element={<Profile />} />
             {/* <Route path="settings" element={<Settings />} /> */}
+            <Route path="downloads" element={<Downloads />} />
           </Route>
         </Routes>
         <ToastContainer />
