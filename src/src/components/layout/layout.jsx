@@ -42,7 +42,7 @@ const Layout = () => {
                   <i aria-hidden="true" className="cog icon"></i>Settings
                 </Link> */}
                 <Link to="/downloads" className="item">
-                  <i aria-hidden="true" className="user icon"></i>Downloads
+                  <i aria-hidden="true" className="cloud download icon"></i>Downloads
                 </Link>
               </div>
             </div>
