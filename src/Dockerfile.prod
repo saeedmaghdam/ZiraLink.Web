@@ -1,13 +1,15 @@
 # build environment
 FROM node:13.12.0-alpine as build
+
 WORKDIR /app
+
 ENV PATH /app/node_modules/.bin:$PATH
+
 COPY ./src/package.json ./
 COPY ./src/package-lock.json ./
 RUN npm ci --silent
 RUN npm install react-scripts@5.0.1 -g --silent
 COPY ./src/. ./
-COPY ./src/.env.development ./.env.production.local
 RUN npm run build
 
 # production environment
