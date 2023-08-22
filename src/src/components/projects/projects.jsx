@@ -98,7 +98,7 @@ const Projects = () => {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Domain</th>
+                <th>Public Domain</th>
                 <th>Internal Url</th>
                 <th>Username</th>
                 <th>Full Name</th>

@@ -131,7 +131,7 @@ const UpdateProject = () => {
             </div>
             {domainType === "default" ? (
               <div className="field">
-                <label>Domain</label>
+                <label>Public Domain</label>
                 <div className="ui right labeled input">
                   <input
                     type="text"
@@ -144,7 +144,7 @@ const UpdateProject = () => {
               </div>
             ) : (
               <div className="field">
-                <label>Domain</label>
+                <label>Public Domain</label>
                 <input
                   type="text"
                   placeholder="Domain"
