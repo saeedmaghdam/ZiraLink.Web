@@ -97,6 +97,7 @@ const NewProject = () => {
                   value="custom"
                   onChange={onDomainTypeChanged}
                   checked={domainType === "custom"}
+                  disabled
                 />
                 <label>Custom Domain</label>
               </div>
@@ -107,7 +108,7 @@ const NewProject = () => {
                 <div className="ui right labeled input">
                   <input
                     type="text"
-                    placeholder="Domain"
+                    placeholder="Public Domain"
                     value={domain}
                     onChange={($event) => setDomain($event.target.value)}
                   />
@@ -116,10 +117,10 @@ const NewProject = () => {
               </div>
             ) : (
               <div className="field">
-                <label>Domain</label>
+                <label>Public Domain</label>
                 <input
                   type="text"
-                  placeholder="Domain"
+                  placeholder="Public Domain"
                   value={domain}
                   onChange={($event) => setDomain($event.target.value)}
                 />
