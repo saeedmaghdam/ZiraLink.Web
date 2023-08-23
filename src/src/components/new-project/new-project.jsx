@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import projectService from "../../services/projectService";
-import enums from "../../enums/enums";
-import notify from "../../services/notify";
-import styles from "./new-project.module.css";
-import config from "../../config";
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import projectService from '../../services/projectService';
+import enums from '../../enums/enums';
+import notify from '../../services/notify';
+import styles from './new-project.module.css';
+import config from '../../config';
 
 const NewProject = () => {
-  const [domainType, setDomainType] = useState("default");
-  const [title, setTitle] = useState("");
-  const [domain, setDomain] = useState("");
-  const [domainProtocol, setDomainProtocol] = useState("http");
-  const [internalUrl, setInternalUrl] = useState("");
+  const [domainType, setDomainType] = useState('default');
+  const [title, setTitle] = useState('');
+  const [domain, setDomain] = useState('');
+  const [domainProtocol, setDomainProtocol] = useState('http');
+  const [internalUrl, setInternalUrl] = useState('');
   const [state, setState] = useState(true);
   const navigate = useNavigate();
 
@@ -22,25 +22,23 @@ const NewProject = () => {
     projectService
       .create(
         title,
-        domainType === "default"
-          ? enums.domainType.default
-          : enums.domainType.custom,
-          domain,
-          `${domainProtocol}://${internalUrl}`,
-          state ? enums.projectState.active : enums.projectState.inactive
+        domainType === 'default' ? enums.domainType.default : enums.domainType.custom,
+        domain,
+        `${domainProtocol}://${internalUrl}`,
+        state ? enums.projectState.active : enums.projectState.inactive
       )
       .then(() => {
-        notify.success("Project added successfully");
-        navigate("/projects");
+        notify.success('Project added successfully');
+        navigate('/projects');
       })
-      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   };
 
   const onDomainProtocolClicked = ($event) => {
     $event.preventDefault();
 
-    if (domainProtocol === "http") setDomainProtocol("https");
-    else setDomainProtocol("http");
+    if (domainProtocol === 'http') setDomainProtocol('https');
+    else setDomainProtocol('http');
   };
 
   const onActiveClicked = ($event) => {
@@ -84,7 +82,7 @@ const NewProject = () => {
                   name="radioGroup"
                   value="default"
                   onChange={onDomainTypeChanged}
-                  checked={domainType === "default"}
+                  checked={domainType === 'default'}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -96,13 +94,13 @@ const NewProject = () => {
                   name="radioGroup"
                   value="custom"
                   onChange={onDomainTypeChanged}
-                  checked={domainType === "custom"}
+                  checked={domainType === 'custom'}
                   disabled
                 />
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType === "default" ? (
+            {domainType === 'default' ? (
               <div className="field">
                 <label>Public Domain</label>
                 <div className="ui right labeled input">
@@ -130,11 +128,10 @@ const NewProject = () => {
               <label>Internal Url</label>
               <div className="ui labeled input">
                 <button
-                  className={`ui label toggle button ${
-                    domainProtocol === "https" && "green"
-                  } ${styles.protocol}`}
-                  onClick={onDomainProtocolClicked}
-                >
+                  className={`ui label toggle button ${domainProtocol === 'https' && 'green'} ${
+                    styles.protocol
+                  }`}
+                  onClick={onDomainProtocolClicked}>
                   {domainProtocol}://
                 </button>
                 <input
@@ -145,18 +142,11 @@ const NewProject = () => {
               </div>
             </div>
             <div className="field">
-              <button
-                className={`ui toggle button ${state && "green"}`}
-                onClick={onActiveClicked}
-              >
+              <button className={`ui toggle button ${state && 'green'}`} onClick={onActiveClicked}>
                 Active
               </button>
             </div>
-            <button
-              className="ui button"
-              type="submit"
-              onClick={onSubmitClicked}
-            >
+            <button className="ui button" type="submit" onClick={onSubmitClicked}>
               Save
             </button>
           </form>

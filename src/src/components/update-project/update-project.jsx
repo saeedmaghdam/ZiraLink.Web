@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import notify from "../../services/notify";
-import enums from "../../enums/enums";
-import projectService from "../../services/projectService";
-import styles from "./update-project.module.css";
-import config from "../../config";
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import notify from '../../services/notify';
+import enums from '../../enums/enums';
+import projectService from '../../services/projectService';
+import styles from './update-project.module.css';
+import config from '../../config';
 
 const UpdateProject = () => {
-  const [domainType, setDomainType] = useState("default");
-  const [title, setTitle] = useState("");
-  const [breadcrumbTitle, setBreadcrumbTitle] = useState("");
-  const [domainProtocol, setDomainProtocol] = useState("http");
-  const [domain, setDomain] = useState("");
-  const [internalUrl, setInternalUrl] = useState("");
+  const [domainType, setDomainType] = useState('default');
+  const [title, setTitle] = useState('');
+  const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
+  const [domainProtocol, setDomainProtocol] = useState('http');
+  const [domain, setDomain] = useState('');
+  const [internalUrl, setInternalUrl] = useState('');
   const [state, setState] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,25 +21,21 @@ const UpdateProject = () => {
     projectService
       .getById(id)
       .then((resp) => {
-        setDomainType(
-          resp.data.domainType === enums.domainType.default
-            ? "default"
-            : "custom"
-        );
+        setDomainType(resp.data.domainType === enums.domainType.default ? 'default' : 'custom');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
         setDomain(resp.data.domain);
         setState(resp.data.state);
-        
-        const colonIndex = resp.data.internalUrl.indexOf(":");
+
+        const colonIndex = resp.data.internalUrl.indexOf(':');
         let internalUrl = resp.data.internalUrl;
         if (colonIndex !== -1) {
-          setDomainProtocol(internalUrl.slice(0, colonIndex))
+          setDomainProtocol(internalUrl.slice(0, colonIndex));
           internalUrl = internalUrl.slice(colonIndex + 3);
         }
         setInternalUrl(internalUrl);
       })
-      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   }, [id]);
 
   const onDomainTypeChanged = ($event) => setDomainType($event.target.value);
@@ -52,8 +48,8 @@ const UpdateProject = () => {
   const onDomainProtocolClicked = ($event) => {
     $event.preventDefault();
 
-    if (domainProtocol === "http") setDomainProtocol("https");
-    else setDomainProtocol("http");
+    if (domainProtocol === 'http') setDomainProtocol('https');
+    else setDomainProtocol('http');
   };
 
   const onSubmitClicked = ($event) => {
@@ -62,18 +58,16 @@ const UpdateProject = () => {
       .patch(
         id,
         title,
-        domainType === "default"
-          ? enums.domainType.default
-          : enums.domainType.custom,
-          domain,
-          `${domainProtocol}://${internalUrl}`,
+        domainType === 'default' ? enums.domainType.default : enums.domainType.custom,
+        domain,
+        `${domainProtocol}://${internalUrl}`,
         state ? enums.projectState.active : enums.projectState.inactive
       )
       .then(() => {
-        notify.success("Project updated successfully");
-        navigate("/projects");
+        notify.success('Project updated successfully');
+        navigate('/projects');
       })
-      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   };
 
   return (
@@ -112,7 +106,7 @@ const UpdateProject = () => {
                   name="radioGroup"
                   value="default"
                   onChange={onDomainTypeChanged}
-                  checked={domainType === "default"}
+                  checked={domainType === 'default'}
                 />
                 <label>Zira's Subdomain</label>
               </div>
@@ -124,13 +118,13 @@ const UpdateProject = () => {
                   name="radioGroup"
                   value="custom"
                   onChange={onDomainTypeChanged}
-                  checked={domainType === "custom"}
+                  checked={domainType === 'custom'}
                   disabled
                 />
                 <label>Custom Domain</label>
               </div>
             </div>
-            {domainType === "default" ? (
+            {domainType === 'default' ? (
               <div className="field">
                 <label>Public Domain</label>
                 <div className="ui right labeled input">
@@ -158,11 +152,10 @@ const UpdateProject = () => {
               <label>Internal Url</label>
               <div className="ui labeled input">
                 <button
-                  className={`ui label toggle button ${
-                    domainProtocol === "https" && "green"
-                  } ${styles.protocol}`}
-                  onClick={onDomainProtocolClicked}
-                >
+                  className={`ui label toggle button ${domainProtocol === 'https' && 'green'} ${
+                    styles.protocol
+                  }`}
+                  onClick={onDomainProtocolClicked}>
                   {domainProtocol}://
                 </button>
                 <input
@@ -173,18 +166,11 @@ const UpdateProject = () => {
               </div>
             </div>
             <div className="field">
-              <button
-                className={`ui toggle button ${state && "green"}`}
-                onClick={onActiveClicked}
-              >
+              <button className={`ui toggle button ${state && 'green'}`} onClick={onActiveClicked}>
                 Active
               </button>
             </div>
-            <button
-              className="ui button"
-              type="submit"
-              onClick={onSubmitClicked}
-            >
+            <button className="ui button" type="submit" onClick={onSubmitClicked}>
               Save
             </button>
           </form>

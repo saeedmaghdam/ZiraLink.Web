@@ -1,6 +1,6 @@
-import { Link, Outlet } from "react-router-dom";
-import styles from "./layout.module.css";
-import customerService from "../../services/customerService";
+import { Link, Outlet } from 'react-router-dom';
+import styles from './layout.module.css';
+import customerService from '../../services/customerService';
 
 const Layout = () => {
   return (
@@ -10,12 +10,14 @@ const Layout = () => {
           <div className="row noPadding noMargin">
             <div className={`eight wide column`}>
               <h1 className="prevent-highlight">
-                Zira <span className={styles.yellow}>Link</span>{" "}
+                Zira <span className={styles.yellow}>Link</span>{' '}
                 <span className={styles.small}>dashbboard</span>
               </h1>
             </div>
             <div className={`eight wide column right aligned`}>
-              <button className={`circular ui icon button ${styles.signOut}`} onClick={() => customerService.signOut() }>
+              <button
+                className={`circular ui icon button ${styles.signOut}`}
+                onClick={() => customerService.signOut()}>
                 <i className="icon sign-out"></i>
               </button>
             </div>
@@ -27,8 +29,7 @@ const Layout = () => {
           <div className={`one wide column noPadding ${styles.fullHeight}`}>
             <div className="ui segment pushable noBorder noBorderRadius">
               <div
-                className={`ui inverted vertical labeled icon ui overlay centered wide animating visible sidebar menu fullWidth ${styles.menu}`}
-              >
+                className={`ui inverted vertical labeled icon ui overlay centered wide animating visible sidebar menu fullWidth ${styles.menu}`}>
                 {/* <Link to="/" className="item">
                   <i aria-hidden="true" className="home icon"></i>Overview
                 </Link> */}
@@ -47,9 +48,7 @@ const Layout = () => {
               </div>
             </div>
           </div>
-          <div
-            className={`fifteen wide column ${styles.fullHeight} ${styles.container}`}
-          >
+          <div className={`fifteen wide column ${styles.fullHeight} ${styles.container}`}>
             <div className={`ui container ${styles.componentContainer}`}>
               <Outlet></Outlet>
             </div>

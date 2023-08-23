@@ -1,4 +1,4 @@
-import styles from "./downloads.module.css"
+import styles from './downloads.module.css';
 
 const Downloads = () => (
   <div className="ui grid">

@@ -1,36 +1,45 @@
-import { useEffect, useState } from "react";
-import customerService from "../../services/customerService";
-import notify from "../../services/notify";
+import { useEffect, useState } from 'react';
+import customerService from '../../services/customerService';
+import notify from '../../services/notify';
 
 const Profile = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [family, setFamily] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [family, setFamily] = useState('');
   const [currentPassword, setCurrentPassword] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
 
   useEffect(() => {
-    customerService.getProfile().then(resp => {
-      setUsername(resp.data.username);
-      setEmail(resp.data.email);
-      setName(resp.data.name);
-      setFamily(resp.data.family);
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
+    customerService
+      .getProfile()
+      .then((resp) => {
+        setUsername(resp.data.username);
+        setEmail(resp.data.email);
+        setName(resp.data.name);
+        setFamily(resp.data.family);
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   }, []);
-  
+
   const onUpdateProfileClicked = ($event) => {
     $event.preventDefault();
-    customerService.updateProfile(name, family).then((resp) => notify.success("Profile updated")).catch(err => notify.error(`Operation failed. ${err ?? ""}`));;
-  }
+    customerService
+      .updateProfile(name, family)
+      .then((resp) => notify.success('Profile updated'))
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
+  };
 
   const onChangePasswordClicked = ($event) => {
     $event.preventDefault();
-    customerService.changePassword(currentPassword, password, confirmPassword).then((resp) => {
-      notify.success("Password changed");
-    }).catch(err => notify.error(`Operation failed. ${err ?? ""}`));
-  }
+    customerService
+      .changePassword(currentPassword, password, confirmPassword)
+      .then((resp) => {
+        notify.success('Password changed');
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
+  };
 
   return (
     <div className="ui grid">
@@ -54,15 +63,30 @@ const Profile = () => {
             </div>
             <div className="field">
               <label>Current Password</label>
-              <input type="password" placeholder="Current Password" value={currentPassword} onChange={$event => setCurrentPassword($event.target.value)} />
+              <input
+                type="password"
+                placeholder="Current Password"
+                value={currentPassword}
+                onChange={($event) => setCurrentPassword($event.target.value)}
+              />
             </div>
             <div className="field">
               <label>Password</label>
-              <input type="password" placeholder="Password" value={password} onChange={$event => setPassword($event.target.value)} />
+              <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={($event) => setPassword($event.target.value)}
+              />
             </div>
             <div className="field">
               <label>Confirm Password</label>
-              <input type="password" placeholder="Confirm Password" value={confirmPassword} onChange={$event => setConfirmPassword($event.target.value)} />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={($event) => setConfirmPassword($event.target.value)}
+              />
             </div>
             <button className="ui button" type="submit" onClick={onChangePasswordClicked}>
               Save
@@ -72,11 +96,19 @@ const Profile = () => {
           <form className="ui form">
             <div className="field">
               <label>Name</label>
-              <input placeholder="Name" value={name} onChange={$event => setName($event.target.value)} />
+              <input
+                placeholder="Name"
+                value={name}
+                onChange={($event) => setName($event.target.value)}
+              />
             </div>
             <div className="field">
               <label>Family</label>
-              <input placeholder="Family" value={family} onChange={$event => setFamily($event.target.value)} />
+              <input
+                placeholder="Family"
+                value={family}
+                onChange={($event) => setFamily($event.target.value)}
+              />
             </div>
             <button className="ui button" type="submit" onClick={onUpdateProfileClicked}>
               Save
