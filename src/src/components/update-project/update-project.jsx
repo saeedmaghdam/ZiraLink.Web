@@ -108,7 +108,7 @@ const UpdateProject = () => {
                   onChange={onDomainTypeChanged}
                   checked={domainType === 'default'}
                 />
-                <label>Zira's Subdomain</label>
+                <label>Zira&apos;s Subdomain</label>
               </div>
             </div>
             <div className="field">

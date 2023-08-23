@@ -12,13 +12,13 @@ const Downloads = () => (
     <div className="row">
       <div className="sixteen wide column">
         <a href="/static/win-x64.zip" target="_black" className={styles.downloadLink}>
-          <i class="cloud download icon"></i>Windows x64
+          <i className="cloud download icon"></i>Windows x64
         </a>
         <a href="/static/linux-x64.zip" target="_black" className={styles.downloadLink}>
-          <i class="cloud download icon"></i>Linux x64
+          <i className="cloud download icon"></i>Linux x64
         </a>
         <a href="/static/osx-x64.zip" target="_black" className={styles.downloadLink}>
-          <i class="cloud download icon"></i>macOS x64
+          <i className="cloud download icon"></i>macOS x64
         </a>
       </div>
     </div>

@@ -15,7 +15,7 @@ const Projects = () => {
   const handleConfirm = () => {
     projectService
       .delete(productIdToDelete)
-      .then((resp) => {
+      .then(() => {
         getData();
         notify.success('Project successfully removed');
       })
@@ -116,13 +116,13 @@ const Projects = () => {
                         <a
                           href={`https://${item.domain}${config.DEFAULT_DOMAIN}`}
                           target="_blank"
-                          rel="nofollow">
+                          rel="nofollow noreferrer">
                           <span className="bold black">{item.domain}</span>
                           <span className={styles.gray}>{config.DEFAULT_DOMAIN}</span>
                         </a>
                       )}
                       {item.domainType !== enums.domainType.default && (
-                        <a href={item.domain} target="_blank" rel="nofollow">
+                        <a href={item.domain} target="_blank" rel="nofollow noreferrer">
                           <span className="black">{item.domain}</span>
                         </a>
                       )}

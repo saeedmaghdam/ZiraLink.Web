@@ -27,7 +27,7 @@ const Profile = () => {
     $event.preventDefault();
     customerService
       .updateProfile(name, family)
-      .then((resp) => notify.success('Profile updated'))
+      .then(() => notify.success('Profile updated'))
       .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   };
 
@@ -35,7 +35,7 @@ const Profile = () => {
     $event.preventDefault();
     customerService
       .changePassword(currentPassword, password, confirmPassword)
-      .then((resp) => {
+      .then(() => {
         notify.success('Password changed');
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
