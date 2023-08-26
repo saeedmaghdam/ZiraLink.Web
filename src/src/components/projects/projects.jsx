@@ -161,68 +161,6 @@ const Projects = () => {
           </table>
         </div>
       </div>
-      {/* <div className="row">
-        <div className="sixteen wide column">
-          <div
-            aria-label="Pagination Navigation"
-            role="navigation"
-            className="ui pagination pointing secondary menu"
-          >
-            <a
-              aria-current="false"
-              aria-disabled="false"
-              tabindex="0"
-              value="1"
-              aria-label="Previous item"
-              type="prevItem"
-              className="item"
-            >
-              ⟨
-            </a>
-            <a
-              aria-current="true"
-              aria-disabled="false"
-              tabindex="0"
-              value="1"
-              type="pageItem"
-              className="active item"
-            >
-              1
-            </a>
-            <a
-              aria-current="false"
-              aria-disabled="false"
-              tabindex="0"
-              value="2"
-              type="pageItem"
-              className="item"
-            >
-              2
-            </a>
-            <a
-              aria-current="false"
-              aria-disabled="false"
-              tabindex="0"
-              value="3"
-              type="pageItem"
-              className="item"
-            >
-              3
-            </a>
-            <a
-              aria-current="false"
-              aria-disabled="false"
-              tabindex="0"
-              value="2"
-              aria-label="Next item"
-              type="nextItem"
-              className="item"
-            >
-              ⟩
-            </a>
-          </div>
-        </div>
-      </div> */}
       <Confirm open={confirmShown} onCancel={handleCancel} onConfirm={handleConfirm} />
     </div>
   );
