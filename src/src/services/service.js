@@ -18,10 +18,10 @@ const service = {
       })
         .then((resp) => {
           if (!isResponseValid(resp)) reject();
-
           return resp.json();
         })
         .then((json) => {
+          if (!json.status) reject(json.errorMessage);
           if (json === undefined) reject(`Response is empty`);
 
           resolve(json);
@@ -49,10 +49,10 @@ const service = {
       })
         .then((resp) => {
           if (!isResponseValid(resp)) reject();
-
           return resp.json();
         })
         .then((json) => {
+          if (!json.status) reject(json.errorMessage);
           if (json === undefined) reject(`Response is empty`);
 
           resolve(json);
@@ -80,10 +80,10 @@ const service = {
       })
         .then((resp) => {
           if (!isResponseValid(resp)) reject();
-
           return resp.json();
         })
         .then((json) => {
+          if (!json.status) reject(json.errorMessage);
           if (json === undefined) reject(`Response is empty`);
 
           resolve(json);
@@ -109,10 +109,10 @@ const service = {
       })
         .then((resp) => {
           if (!isResponseValid(resp)) reject();
-
           return resp.json();
         })
         .then((json) => {
+          if (!json.status) reject(json.errorMessage);
           if (json === undefined) reject(`Response is empty`);
 
           resolve(json);
@@ -128,11 +128,9 @@ const isResponseValid = (resp) => {
   if (resp.status === 401) {
     localStorage.removeItem('token');
     window.location.href = `${config.BASE_URL}/bff/login`;
-  } else if (!resp.ok) {
-    return false;
-  } else {
-    return true;
   }
+
+  return true;
 };
 
 export default service;
