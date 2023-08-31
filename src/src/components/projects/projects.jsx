@@ -44,13 +44,18 @@ const Projects = () => {
     const date = new Date(inp);
     const formattedDate = date.toLocaleDateString('en-US', {
       year: 'numeric',
-      month: 'long',
+      month: 'numeric',
       day: 'numeric',
+    });
+    const formattedTime = date.toLocaleTimeString('en-US', {
       hour: 'numeric',
       minute: 'numeric'
     });
 
-    return formattedDate;
+    return <>
+    <p className={styles.date}>{formattedDate}</p>
+    <p>{formattedTime}</p>
+    </>
   };
 
   const getUrl = (input) => {

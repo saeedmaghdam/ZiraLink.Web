@@ -5,3 +5,7 @@
 .state {
     padding: 6px !important;
 }
+
+.date {
+    margin: 0;
+}
