@@ -36,6 +36,9 @@ const Layout = () => {
                 <Link to="/projects" className="item">
                   <i aria-hidden="true" className="cube icon"></i>Projects
                 </Link>
+                <Link to="/app-projects" className="item">
+                  <i aria-hidden="true" className="cube icon"></i>App Projects
+                </Link>
                 <Link to="/profile" className="item">
                   <i aria-hidden="true" className="user icon"></i>Profile
                 </Link>
