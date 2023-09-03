@@ -1,54 +1,77 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import appProjectService from "../../services/appProjectService";
-import enums from "../../enums/enums";
-import notify from "../../services/notify"; 
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import notify from '../../services/notify';
+import enums from '../../enums/enums';
+import appProjectService from '../../services/appProjectService';
 
-const NewAppProject = () => {
+
+const UpdateProject = () => {
   const [portUsageType, setPortUsageType] = useState("default");
   const [title, setTitle] = useState("");
+  const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
   const [appUniqueName, setAppUniqueName] = useState("");
   const [projectViewId, setProjectViewId] = useState("");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  const onPortUsageChanged = ($event) => setPortUsageType($event.target.value);
-
-  const onSubmitClicked = ($event) => {
-    $event.preventDefault();
+  useEffect(() => {
     appProjectService
-      .create(
-        title,
-        portUsageType === "default"
-          ? enums.portUsageType.default
-          : enums.portUsageType.custom,
-        appUniqueName,
-        `${projectViewId}://${internalPort}`,
-        state ? enums.projectState.active : enums.projectState.inactive
-      )
-      .then(() => {
-        notify.success("App project added successfully");
-        navigate("/app-projects");
+      .getById(id)
+      .then((resp) => {
+        setPortUsageType(resp.data.portUsageType === enums.portUsageType.default ? 'default' : 'custom');
+        setTitle(resp.data.title);
+        setBreadcrumbTitle(resp.data.title);
+        setProjectViewId(resp.data.projectViewId);
+        setState(resp.data.state);
+
+        const colonIndex = resp.data.internalPort.indexOf(':');
+        let internalPort = resp.data.internalPort;
+        if (colonIndex !== -1) {
+          setInternalPort(internalPort.slice(0, colonIndex));
+          internalPort = internalPort.slice(colonIndex + 3);
+        }
+        setInternalPort(internalPort);
       })
-      .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
-  };
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
+  }, [id]);
+
+  const onPortUsageChanged = ($event) => setPortUsageType($event.target.value);
 
   const onActiveClicked = ($event) => {
     $event.preventDefault();
     setState(!state);
   };
- 
+
+  const onSubmitClicked = ($event) => {
+    $event.preventDefault();
+    appProjectService
+      .patch(
+        id,
+        title,
+        portUsageType === 'default' ? enums.portUsageType.default : enums.portUsageType.custom,
+        appUniqueName,
+        `${projectViewId}://${internalPort}`,
+        state ? enums.projectState.active : enums.projectState.inactive
+      )
+      .then(() => {
+        notify.success('Project updated successfully');
+        navigate('/app-projects');
+      })
+      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
+  };
+
   return (
     <div className="ui grid">
       <div className="row">
         <div className="fifteen wide column">
           <div className="ui breadcrumb">
             <Link to="/app-projects" className="section">
-              App Projects
+              Projects
             </Link>
             <i aria-hidden="true" className="right angle icon divider"></i>
-            <div className="active section">New App Project</div>
+            <div className="active section">Update {breadcrumbTitle}</div>
           </div>
         </div>
         <div className="one wide column right aligned">
@@ -59,7 +82,7 @@ const NewAppProject = () => {
       </div>
       <div className="row">
         <div className="sixteen wide column">
-          <form className="ui form">
+        <form className="ui form">
             <div className="field">
               <label>Project Title</label>
               <input
@@ -149,4 +172,4 @@ const NewAppProject = () => {
   );
 };
 
-export default NewAppProject;
+export default UpdateProject;
