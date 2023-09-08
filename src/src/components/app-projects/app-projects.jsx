@@ -102,7 +102,7 @@ const AppProjects = () => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td> 
-                    <td>{item.viewId}</td> 
+                    <td>{item.projectViewId}</td> 
                     <td>{item.appUniqueName}</td> 
                     <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>

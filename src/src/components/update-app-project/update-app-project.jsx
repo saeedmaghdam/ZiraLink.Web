@@ -25,7 +25,7 @@ const UpdateAppProject = () => {
         setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
-        setProjectViewId(resp.data.viewId);
+        setProjectViewId(resp.data.projectViewId);
         setAppUniqueName(resp.data.appUniqueName);
         setState(resp.data.state); 
         setInternalPort(resp.data.internalPort);
