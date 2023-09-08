@@ -5,8 +5,8 @@ import enums from '../../enums/enums';
 import appProjectService from '../../services/appProjectService';
 
 
-const UpdateProject = () => {
-  const [portUsageType, setPortUsageType] = useState("default");
+const UpdateAppProject = () => {
+  const [appProjectType, setAppProjectType] = useState("default");
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
   const [appUniqueName, setAppUniqueName] = useState("");
@@ -20,24 +20,20 @@ const UpdateProject = () => {
     appProjectService
       .getById(id)
       .then((resp) => {
-        setPortUsageType(resp.data.portUsageType === enums.portUsageType.default ? 'default' : 'custom');
+        // eslint-disable-next-line no-debugger
+        debugger
+        setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
-        setProjectViewId(resp.data.projectViewId);
-        setState(resp.data.state);
-
-        const colonIndex = resp.data.internalPort.indexOf(':');
-        let internalPort = resp.data.internalPort;
-        if (colonIndex !== -1) {
-          setInternalPort(internalPort.slice(0, colonIndex));
-          internalPort = internalPort.slice(colonIndex + 3);
-        }
-        setInternalPort(internalPort);
+        setProjectViewId(resp.data.viewId);
+        setAppUniqueName(resp.data.appUniqueName);
+        setState(resp.data.state); 
+        setInternalPort(resp.data.internalPort);
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   }, [id]);
 
-  const onPortUsageChanged = ($event) => setPortUsageType($event.target.value);
+  const onAppProjectTypeChanged = ($event) => setAppProjectType($event.target.value);
 
   const onActiveClicked = ($event) => {
     $event.preventDefault();
@@ -50,10 +46,13 @@ const UpdateProject = () => {
       .patch(
         id,
         title,
-        portUsageType === 'default' ? enums.portUsageType.default : enums.portUsageType.custom,
+        appProjectType === "use" ? projectViewId : "",
+        appProjectType === "share"
+          ? enums.appProjectType.share
+          : enums.appProjectType.use,
         appUniqueName,
-        `${projectViewId}://${internalPort}`,
-        state ? enums.projectState.active : enums.projectState.inactive
+        internalPort,
+        state ? enums.rowState.active : enums.rowState.inactive
       )
       .then(() => {
         notify.success('Project updated successfully');
@@ -97,9 +96,9 @@ const UpdateProject = () => {
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="default"
-                  onChange={onPortUsageChanged}
-                  checked={portUsageType === "default"}
+                  value="share"
+                  onChange={onAppProjectTypeChanged}
+                  checked={appProjectType === "share"}
                 />
                 <label>Share a port</label>
               </div>
@@ -109,14 +108,14 @@ const UpdateProject = () => {
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="custom"
-                  onChange={onPortUsageChanged}
-                  checked={portUsageType === "custom"}
+                  value="use"
+                  onChange={onAppProjectTypeChanged}
+                  checked={appProjectType === "use"}
                 />
                 <label>Use a port</label>
               </div>
             </div>
-            {portUsageType === "default" ? (<>
+            {appProjectType === "share" ? (<>
 
             </>
             ) : (
@@ -172,4 +171,4 @@ const UpdateProject = () => {
   );
 };
 
-export default UpdateProject;
+export default UpdateAppProject;

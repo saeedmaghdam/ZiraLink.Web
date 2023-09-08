@@ -5,7 +5,7 @@ import enums from "../../enums/enums";
 import notify from "../../services/notify"; 
 
 const NewAppProject = () => {
-  const [portUsageType, setPortUsageType] = useState("default");
+  const [appProjectType, setAppProjectType] = useState("share");
   const [title, setTitle] = useState("");
   const [appUniqueName, setAppUniqueName] = useState("");
   const [projectViewId, setProjectViewId] = useState("");
@@ -13,19 +13,21 @@ const NewAppProject = () => {
   const [state, setState] = useState(true);
   const navigate = useNavigate();
 
-  const onPortUsageChanged = ($event) => setPortUsageType($event.target.value);
+  const onAppProjectTypeChanged = ($event) => setAppProjectType($event.target.value);
 
   const onSubmitClicked = ($event) => {
     $event.preventDefault();
+    
     appProjectService
       .create(
         title,
-        portUsageType === "default"
-          ? enums.portUsageType.default
-          : enums.portUsageType.custom,
+        appProjectType === "use" ? projectViewId : "",
+        appProjectType === "share"
+          ? enums.appProjectType.share
+          : enums.appProjectType.use,
         appUniqueName,
-        `${projectViewId}://${internalPort}`,
-        state ? enums.projectState.active : enums.projectState.inactive
+        internalPort,
+        state ? enums.rowState.active : enums.rowState.inactive
       )
       .then(() => {
         notify.success("App project added successfully");
@@ -74,9 +76,9 @@ const NewAppProject = () => {
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="default"
-                  onChange={onPortUsageChanged}
-                  checked={portUsageType === "default"}
+                  value="share"
+                  onChange={onAppProjectTypeChanged}
+                  checked={appProjectType === "share"}
                 />
                 <label>Share a port</label>
               </div>
@@ -86,14 +88,14 @@ const NewAppProject = () => {
                 <input
                   type="radio"
                   name="radioGroup"
-                  value="custom"
-                  onChange={onPortUsageChanged}
-                  checked={portUsageType === "custom"}
+                  value="use"
+                  onChange={onAppProjectTypeChanged}
+                  checked={appProjectType === "use"}
                 />
                 <label>Use a port</label>
               </div>
             </div>
-            {portUsageType === "default" ? (<>
+            {appProjectType === "share" ? (<>
 
             </>
             ) : (

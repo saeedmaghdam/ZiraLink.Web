@@ -1,11 +1,10 @@
 import { Link } from 'react-router-dom';
-import projectService from '../../services/projectService';
+import appProjectService from '../../services/appProjectService';
 import { useEffect, useState } from 'react';
+import notify from '../../services/notify';
+import { Confirm } from 'semantic-ui-react'; 
 import enums from '../../enums/enums';
 import styles from './app-projects.module.css';
-import notify from '../../services/notify';
-import { Confirm } from 'semantic-ui-react';
-import config from '../../config';
 
 const AppProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -13,7 +12,7 @@ const AppProjects = () => {
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
   const handleConfirm = () => {
-    projectService
+    appProjectService
       .delete(productIdToDelete)
       .then(() => {
         getData();
@@ -27,7 +26,7 @@ const AppProjects = () => {
   useEffect(() => getData(), []);
 
   const getData = () => {
-    projectService
+    appProjectService
       .get()
       .then((resp) => {
         setProjects(resp.data);
@@ -58,20 +57,6 @@ const AppProjects = () => {
     </>
   };
 
-  const getUrl = (input) => {
-    const colonIndex = input.indexOf(':');
-    let url = input;
-    if (colonIndex === -1) return <span>{input}</span>;
-    const schema = url.slice(0, colonIndex);
-    url = url.slice(colonIndex + 3);
-
-    return (
-      <>
-        <span className={schema === 'http' ? '' : 'green bold'}>{schema}://</span>
-        {url}
-      </>
-    );
-  };
 
   return (
     <div className="ui grid">
@@ -102,6 +87,7 @@ const AppProjects = () => {
             <thead>
               <tr>
                 <th>Title</th>
+                <th>Project ViewId</th>
                 <th>App Unique Name</th>
                 <th>Internal Port</th>
                 <th>Username</th>
@@ -112,27 +98,13 @@ const AppProjects = () => {
               </tr>
             </thead>
             <tbody>
-              {projects.map((item) => {
+            {projects.map((item) => {
                 return (
                   <tr key={item.id}>
-                    <td>{item.title}</td>
-                    <td>
-                      {item.domainType === enums.domainType.default && (
-                        <a
-                          href={`https://${item.domain}${config.DEFAULT_DOMAIN}`}
-                          target="_blank"
-                          rel="nofollow noreferrer">
-                          <span className="bold black">{item.domain}</span>
-                          <span className={styles.gray}>{config.DEFAULT_DOMAIN}</span>
-                        </a>
-                      )}
-                      {item.domainType !== enums.domainType.default && (
-                        <a href={item.domain} target="_blank" rel="nofollow noreferrer">
-                          <span className="black">{item.domain}</span>
-                        </a>
-                      )}
-                    </td>
-                    <td>{getUrl(item.internalUrl)}</td>
+                    <td>{item.title}</td> 
+                    <td>{item.viewId}</td> 
+                    <td>{item.appUniqueName}</td> 
+                    <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>
                     <td>
                       {item.customer.name} {item.customer.family}
@@ -141,9 +113,9 @@ const AppProjects = () => {
                     <td>
                       <span
                         className={`ui message ${
-                          item.state === enums.projectState.active ? 'green' : 'yellow'
+                          item.state === enums.rowState.active ? 'green' : 'yellow'
                         } ${styles.state}`}>
-                        {item.state === enums.projectState.active ? 'Active' : 'Inactive'}
+                        {item.state === enums.rowState.active ? 'Active' : 'Inactive'}
                       </span>
                     </td>
                     <td>

@@ -3,7 +3,11 @@ const enums = {
     default: 0,
     custom: 1
   },
-  projectState: {
+  appProjectType: {
+    share: 0,
+    use: 1
+  },
+  rowState: {
     inactive: 0,
     active: 1
   }

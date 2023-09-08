@@ -1,22 +1,25 @@
 import service from './service';
 
 const appProjectService = {
+
   get: () => service.get('/AppProject'),
   getById: (id) => service.get(`/AppProject/${id}`),
-  create: (title, domainType, domain, internalUrl, state) =>
+  create: (title, projectViewId, appProjectType, appUniqueName, internalPort, state) =>
     service.post('/AppProject', {
       title: title,
-      domainType: domainType,
-      domain: domain,
-      internalUrl: internalUrl,
+      projectViewId: projectViewId,
+      appProjectType: appProjectType,
+      appUniqueName: appUniqueName,
+      internalPort: internalPort,
       state: state
     }),
-  patch: (id, title, domainType, domain, internalUrl, state) =>
+  patch: (id, title, projectViewId, appProjectType, appUniqueName, internalPort, state) =>
     service.patch(`/AppProject/${id}`, {
       title: title,
-      domainType: domainType,
-      domain: domain,
-      internalUrl: internalUrl,
+      projectViewId: projectViewId,
+      appProjectType: appProjectType,
+      appUniqueName: appUniqueName,
+      internalPort: internalPort,
       state: state
     }),
   delete: (id) => service.delete(`/AppProject/${id}`)
