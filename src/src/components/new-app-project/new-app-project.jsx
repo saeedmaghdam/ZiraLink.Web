@@ -6,8 +6,7 @@ import notify from "../../services/notify";
 
 const NewAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("share");
-  const [title, setTitle] = useState("");
-  const [appUniqueName, setAppUniqueName] = useState("");
+  const [title, setTitle] = useState(""); 
   const [projectViewId, setProjectViewId] = useState("");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
@@ -25,7 +24,6 @@ const NewAppProject = () => {
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
-        appUniqueName,
         internalPort,
         state ? enums.rowState.active : enums.rowState.inactive
       )
@@ -108,17 +106,7 @@ const NewAppProject = () => {
                   onChange={($event) => setProjectViewId($event.target.value)}
                 />
               </div>
-            )}
-            <div className="field">
-              <label>App Unique Name</label>
-              <input
-                type="text"
-                placeholder="App Unique Name"
-                value={appUniqueName}
-                onChange={($event) => setAppUniqueName($event.target.value)}
-              />
-            </div>
-
+            )} 
             <div className="field">
               <label>Internal Port</label>
               <input

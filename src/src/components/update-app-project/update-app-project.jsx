@@ -9,7 +9,6 @@ const UpdateAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("default");
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
-  const [appUniqueName, setAppUniqueName] = useState("");
   const [projectViewId, setProjectViewId] = useState("");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
@@ -26,7 +25,6 @@ const UpdateAppProject = () => {
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
         setProjectViewId(resp.data.projectViewId);
-        setAppUniqueName(resp.data.appUniqueName);
         setState(resp.data.state); 
         setInternalPort(resp.data.internalPort);
       })
@@ -50,7 +48,6 @@ const UpdateAppProject = () => {
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
-        appUniqueName,
         internalPort,
         state ? enums.rowState.active : enums.rowState.inactive
       )
@@ -129,16 +126,6 @@ const UpdateAppProject = () => {
                 />
               </div>
             )}
-            <div className="field">
-              <label>App Unique Name</label>
-              <input
-                type="text"
-                placeholder="App Unique Name"
-                value={appUniqueName}
-                onChange={($event) => setAppUniqueName($event.target.value)}
-              />
-            </div>
-
             <div className="field">
               <label>Internal Port</label>
               <input

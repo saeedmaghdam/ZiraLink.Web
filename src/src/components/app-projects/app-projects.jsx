@@ -88,7 +88,6 @@ const AppProjects = () => {
               <tr>
                 <th>Title</th>
                 <th>Project ViewId</th>
-                <th>App Unique Name</th>
                 <th>Internal Port</th>
                 <th>Username</th>
                 <th>Full Name</th>
@@ -103,7 +102,6 @@ const AppProjects = () => {
                   <tr key={item.id}>
                     <td>{item.title}</td> 
                     <td>{item.projectViewId}</td> 
-                    <td>{item.appUniqueName}</td> 
                     <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>
                     <td>

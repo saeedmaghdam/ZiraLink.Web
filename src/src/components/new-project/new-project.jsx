@@ -25,7 +25,7 @@ const NewProject = () => {
         domainType === 'default' ? enums.domainType.default : enums.domainType.custom,
         domain,
         `${domainProtocol}://${internalUrl}`,
-        state ? enums.projectState.active : enums.projectState.inactive
+        state ? enums.rowState.active : enums.rowState.inactive
       )
       .then(() => {
         notify.success('Project added successfully');
