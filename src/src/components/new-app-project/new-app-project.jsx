@@ -7,7 +7,7 @@ import notify from "../../services/notify";
 const NewAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("share");
   const [title, setTitle] = useState(""); 
-  const [projectViewId, setProjectViewId] = useState("");
+  const [appProjectViewId, setappProjectViewId] = useState("");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const NewAppProject = () => {
     appProjectService
       .create(
         title,
-        appProjectType === "use" ? projectViewId : "",
+        appProjectType === "use" ? appProjectViewId : "",
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
@@ -102,8 +102,8 @@ const NewAppProject = () => {
                 <input
                   type="text"
                   placeholder="Project ViewId"
-                  value={projectViewId}
-                  onChange={($event) => setProjectViewId($event.target.value)}
+                  value={appProjectViewId}
+                  onChange={($event) => setappProjectViewId($event.target.value)}
                 />
               </div>
             )} 

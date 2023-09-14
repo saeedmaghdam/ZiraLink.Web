@@ -9,7 +9,7 @@ const UpdateAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("default");
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
-  const [projectViewId, setProjectViewId] = useState("");
+  const [appProjectViewId, setappProjectViewId] = useState("");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
   const { id } = useParams();
@@ -24,7 +24,7 @@ const UpdateAppProject = () => {
         setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
-        setProjectViewId(resp.data.projectViewId);
+        setappProjectViewId(resp.data.appProjectViewId);
         setState(resp.data.state); 
         setInternalPort(resp.data.internalPort);
       })
@@ -44,7 +44,7 @@ const UpdateAppProject = () => {
       .patch(
         id,
         title,
-        appProjectType === "use" ? projectViewId : "",
+        appProjectType === "use" ? appProjectViewId : "",
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
@@ -121,8 +121,8 @@ const UpdateAppProject = () => {
                 <input
                   type="text"
                   placeholder="Project ViewId"
-                  value={projectViewId}
-                  onChange={($event) => setProjectViewId($event.target.value)}
+                  value={appProjectViewId}
+                  onChange={($event) => setappProjectViewId($event.target.value)}
                 />
               </div>
             )}

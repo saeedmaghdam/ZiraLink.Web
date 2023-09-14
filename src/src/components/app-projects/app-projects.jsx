@@ -2,12 +2,12 @@ import { Link } from 'react-router-dom';
 import appProjectService from '../../services/appProjectService';
 import { useEffect, useState } from 'react';
 import notify from '../../services/notify';
-import { Confirm } from 'semantic-ui-react'; 
+import { Confirm } from 'semantic-ui-react';
 import enums from '../../enums/enums';
 import styles from './app-projects.module.css';
 
 const AppProjects = () => {
-  const [projects, setProjects] = useState([]);
+  const [appProjects, setAppProjects] = useState([]);
   const [confirmShown, setConfirmShown] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
@@ -26,12 +26,21 @@ const AppProjects = () => {
   useEffect(() => getData(), []);
 
   const getData = () => {
+
+    // eslint-disable-next-line no-debugger
+    debugger
     appProjectService
       .get()
       .then((resp) => {
-        setProjects(resp.data);
+        // eslint-disable-next-line no-debugger
+        debugger
+        setAppProjects(resp.data);
       })
-      .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
+      .catch((err) => {
+        
+        // eslint-disable-next-line no-debugger
+        debugger
+        notify.error(`Operation failed. ${err ?? ''}`)});
   };
 
   const onDeleteClicked = (id) => {
@@ -52,8 +61,8 @@ const AppProjects = () => {
     });
 
     return <>
-    <p className={styles.date}>{formattedDate}</p>
-    <p>{formattedTime}</p>
+      <p className={styles.date}>{formattedDate}</p>
+      <p>{formattedTime}</p>
     </>
   };
 
@@ -87,7 +96,7 @@ const AppProjects = () => {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>Project ViewId</th>
+                <th>ViewId</th>
                 <th>Internal Port</th>
                 <th>Username</th>
                 <th>Full Name</th>
@@ -97,11 +106,11 @@ const AppProjects = () => {
               </tr>
             </thead>
             <tbody>
-            {projects.map((item) => {
+              {appProjects.map((item) => {
                 return (
                   <tr key={item.id}>
-                    <td>{item.title}</td> 
-                    <td>{item.projectViewId}</td> 
+                    <td>{item.title}</td>
+                    <td>{item.viewId}</td>
                     <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>
                     <td>
@@ -110,9 +119,8 @@ const AppProjects = () => {
                     <td>{dateFormat(item.dateUpdated)}</td>
                     <td>
                       <span
-                        className={`ui message ${
-                          item.state === enums.rowState.active ? 'green' : 'yellow'
-                        } ${styles.state}`}>
+                        className={`ui message ${item.state === enums.rowState.active ? 'green' : 'yellow'
+                          } ${styles.state}`}>
                         {item.state === enums.rowState.active ? 'Active' : 'Inactive'}
                       </span>
                     </td>
