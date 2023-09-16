@@ -141,9 +141,9 @@ const Projects = () => {
                     <td>
                       <span
                         className={`ui message ${
-                          item.state === enums.rowState.active ? 'green' : 'yellow'
+                          item.state === enums.projectState.active ? 'green' : 'yellow'
                         } ${styles.state}`}>
-                        {item.state === enums.rowState.active ? 'Active' : 'Inactive'}
+                        {item.state === enums.projectState.active ? 'Active' : 'Inactive'}
                       </span>
                     </td>
                     <td>

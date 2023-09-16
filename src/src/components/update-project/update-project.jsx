@@ -61,7 +61,7 @@ const UpdateProject = () => {
         domainType === 'default' ? enums.domainType.default : enums.domainType.custom,
         domain,
         `${domainProtocol}://${internalUrl}`,
-        state ? enums.rowState.active : enums.rowState.inactive
+        state ? enums.projectState.active : enums.projectState.inactive
       )
       .then(() => {
         notify.success('Project updated successfully');

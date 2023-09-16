@@ -26,7 +26,7 @@ const NewAppProject = () => {
           ? enums.appProjectType.share
           : enums.appProjectType.use,
         internalPort,
-        state ? enums.rowState.active : enums.rowState.inactive
+        state ? enums.projectState.active : enums.projectState.inactive
       )
       .then((resData) => {
         if (resData.errors != undefined)

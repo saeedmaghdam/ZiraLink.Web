@@ -7,7 +7,7 @@ const enums = {
     share: 0,
     use: 1
   },
-  rowState: {
+  projectState: {
     inactive: 0,
     active: 1
   }
