@@ -3,7 +3,10 @@ import Layout from './components/layout/layout';
 import Projects from './components/projects/projects';
 import Profile from './components/profile/profile';
 import NewProject from './components/new-project/new-project';
+import AppProjects from './components/app-projects/app-projects';
+import NewAppProject from './components/new-app-project/new-app-project';
 import UpdateProject from './components/update-project/update-project';
+import UpdateAppProject from './components/update-app-project/update-app-project';
 import SigninResult from './components/signin-result/signin-result';
 import { ToastContainer } from 'react-toastify';
 import './App.css';
@@ -23,6 +26,11 @@ function App() {
               <Route path="new" element={<NewProject />} />
               <Route path="update/:id" element={<UpdateProject />} />
             </Route>
+            <Route path="app-projects">
+              <Route index element={<AppProjects />} />
+              <Route path="new" element={<NewAppProject />} />
+              <Route path="update/:id" element={<UpdateAppProject />} />
+            </Route> 
             <Route path="profile" element={<Profile />} />
             {/* <Route path="settings" element={<Settings />} /> */}
             <Route path="downloads" element={<Downloads />} />
