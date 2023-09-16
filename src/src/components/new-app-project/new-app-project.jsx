@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import appProjectService from "../../services/appProjectService";
@@ -7,7 +8,7 @@ import notify from "../../services/notify";
 const NewAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("share");
   const [title, setTitle] = useState(""); 
-  const [appProjectViewId, setappProjectViewId] = useState("");
+  const [appProjectViewId, setappProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
   const navigate = useNavigate();
@@ -20,16 +21,22 @@ const NewAppProject = () => {
     appProjectService
       .create(
         title,
-        appProjectType === "use" ? appProjectViewId : "",
+        appProjectViewId,
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
         internalPort,
         state ? enums.rowState.active : enums.rowState.inactive
       )
-      .then(() => {
-        notify.success("App project added successfully");
-        navigate("/app-projects");
+      .then((resData) => {
+        if (resData.errors != undefined)
+        {
+          notify.error(resData.title); 
+        } else {
+          notify.success("App project added successfully");
+          navigate("/app-projects"); 
+        }
+
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ""}`));
   };

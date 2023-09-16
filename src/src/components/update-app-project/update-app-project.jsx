@@ -9,7 +9,7 @@ const UpdateAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("default");
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
-  const [appProjectViewId, setappProjectViewId] = useState("");
+  const [appProjectViewId, setAppProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
   const { id } = useParams();
@@ -19,12 +19,10 @@ const UpdateAppProject = () => {
     appProjectService
       .getById(id)
       .then((resp) => {
-        // eslint-disable-next-line no-debugger
-        debugger
         setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
-        setappProjectViewId(resp.data.appProjectViewId);
+        setAppProjectViewId(resp.data.appProjectViewId);
         setState(resp.data.state); 
         setInternalPort(resp.data.internalPort);
       })
@@ -44,16 +42,21 @@ const UpdateAppProject = () => {
       .patch(
         id,
         title,
-        appProjectType === "use" ? appProjectViewId : "",
+        appProjectViewId,
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
         internalPort,
         state ? enums.rowState.active : enums.rowState.inactive
       )
-      .then(() => {
-        notify.success('Project updated successfully');
-        navigate('/app-projects');
+      .then((resData) => {
+        if (resData.errors != undefined)
+        {
+          notify.error(resData.title); 
+        } else {
+          notify.success("App project added successfully");
+          navigate("/app-projects"); 
+        }
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
   };
@@ -122,7 +125,7 @@ const UpdateAppProject = () => {
                   type="text"
                   placeholder="Project ViewId"
                   value={appProjectViewId}
-                  onChange={($event) => setappProjectViewId($event.target.value)}
+                  onChange={($event) => setAppProjectViewId($event.target.value)}
                 />
               </div>
             )}

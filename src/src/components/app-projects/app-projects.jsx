@@ -27,19 +27,12 @@ const AppProjects = () => {
 
   const getData = () => {
 
-    // eslint-disable-next-line no-debugger
-    debugger
     appProjectService
       .get()
       .then((resp) => {
-        // eslint-disable-next-line no-debugger
-        debugger
         setAppProjects(resp.data);
       })
       .catch((err) => {
-        
-        // eslint-disable-next-line no-debugger
-        debugger
         notify.error(`Operation failed. ${err ?? ''}`)});
   };
 
