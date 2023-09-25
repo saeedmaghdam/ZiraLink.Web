@@ -90,6 +90,7 @@ const AppProjects = () => {
               <tr>
                 <th>Title</th>
                 <th>ViewId</th>
+                <th>Port Type</th>
                 <th>Internal Port</th>
                 <th>Username</th>
                 <th>Full Name</th>
@@ -104,6 +105,8 @@ const AppProjects = () => {
                   <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>{item.viewId}</td>
+                    <td>{item.portType === enums.portType.tcp ? 'tcp' : 'udp'}
+                    </td>
                     <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>
                     <td>

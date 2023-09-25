@@ -6,7 +6,8 @@ import appProjectService from '../../services/appProjectService';
 
 
 const UpdateAppProject = () => {
-  const [appProjectType, setAppProjectType] = useState("default");
+  const [appProjectType, setAppProjectType] = useState("share");
+  const [portType, setPortType] = useState("tcp");
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
   const [appProjectViewId, setAppProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
@@ -20,6 +21,7 @@ const UpdateAppProject = () => {
       .getById(id)
       .then((resp) => {
         setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
+        setPortType(resp.data.portType === enums.portType.share ? 'tcp' : 'udp');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
         setAppProjectViewId(resp.data.appProjectViewId);
@@ -30,6 +32,7 @@ const UpdateAppProject = () => {
   }, [id]);
 
   const onAppProjectTypeChanged = ($event) => setAppProjectType($event.target.value);
+  const onPortTypeChanged = ($event) => setPortType($event.target.value);
 
   const onActiveClicked = ($event) => {
     $event.preventDefault();
@@ -47,6 +50,9 @@ const UpdateAppProject = () => {
           ? enums.appProjectType.share
           : enums.appProjectType.use,
         internalPort,
+        portType === "tcp"
+          ? enums.portType.tcp
+          : enums.portType.udp,
         state ? enums.projectState.active : enums.projectState.inactive
       )
       .then((resData) => {
@@ -95,7 +101,7 @@ const UpdateAppProject = () => {
               <div className="ui radio checkbox">
                 <input
                   type="radio"
-                  name="radioGroup"
+                  name="AppProjectType"
                   value="share"
                   onChange={onAppProjectTypeChanged}
                   checked={appProjectType === "share"}
@@ -107,7 +113,7 @@ const UpdateAppProject = () => {
               <div className="ui radio checkbox">
                 <input
                   type="radio"
-                  name="radioGroup"
+                  name="AppProjectType"
                   value="use"
                   onChange={onAppProjectTypeChanged}
                   checked={appProjectType === "use"}
@@ -138,7 +144,30 @@ const UpdateAppProject = () => {
                 onChange={($event) => setInternalPort($event.target.value)}
               />
             </div>
-
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="PortType"
+                  value="tcp"
+                  onChange={onPortTypeChanged}
+                  checked={portType === "tcp"}
+                />
+                <label>TCP</label>
+              </div>
+            </div>
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="PortType"
+                  value="udp"
+                  onChange={onPortTypeChanged}
+                  checked={portType === "udp"}
+                />
+                <label>UDP</label>
+              </div>
+            </div>
             <div className="field">
               <button
                 className={`ui toggle button ${state && "green"}`}
