@@ -2,8 +2,8 @@ import service from './service';
 
 const appProjectService = {
 
-  get: () => service.get('/AppProject'),
-  getById: (id) => service.get(`/AppProject/${id}`),
+  get: (appProjectType) => service.get(`/AppProject/${appProjectType}`),
+  getById: (id) => service.get(`/AppProject/GetById/${id}`),
   create: (title, appProjectViewId, appProjectType, portType, internalPort, state) =>
     service.post('/AppProject', {
       title: title,
