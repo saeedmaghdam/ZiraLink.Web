@@ -7,7 +7,8 @@ import enums from '../../enums/enums';
 import styles from './app-projects.module.css';
 
 const AppProjects = () => {
-  const [appProjects, setAppProjects] = useState([]);
+  const [appProjectsForSharePort, setAppProjectsForSharePort] = useState([]);
+  const [appProjectsForUsePort, setAppProjectsForUsePort] = useState([]);
   const [confirmShown, setConfirmShown] = useState(false);
   const [productIdToDelete, setProductIdToDelete] = useState(0);
 
@@ -15,7 +16,8 @@ const AppProjects = () => {
     appProjectService
       .delete(productIdToDelete)
       .then(() => {
-        getData();
+        getDataForSharePort();
+        getDataForUsePort();
         notify.success('App project successfully removed');
       })
       .catch((err) => notify.error(`Operation failed. ${err ?? ''}`));
@@ -23,14 +25,30 @@ const AppProjects = () => {
   };
   const handleCancel = () => setConfirmShown(false);
 
-  useEffect(() => getData(), []);
+  useEffect(() =>{ 
+    getDataForSharePort();
+    getDataForUsePort();
 
-  const getData = () => {
+  }
+  , []);
+
+  const getDataForSharePort = () => {
 
     appProjectService
-      .get()
+      .get(enums.appProjectType.share)
       .then((resp) => {
-        setAppProjects(resp.data);
+        setAppProjectsForSharePort(resp.data);
+      })
+      .catch((err) => {
+        notify.error(`Operation failed. ${err ?? ''}`)});
+  };
+
+  const getDataForUsePort = () => {
+
+    appProjectService
+      .get(enums.appProjectType.use)
+      .then((resp) => {
+        setAppProjectsForUsePort(resp.data);
       })
       .catch((err) => {
         notify.error(`Operation failed. ${err ?? ''}`)});
@@ -89,7 +107,7 @@ const AppProjects = () => {
             <thead>
               <tr>
                 <th>Title</th>
-                <th>ViewId</th>
+                <th>Port Type</th>
                 <th>Internal Port</th>
                 <th>Username</th>
                 <th>Full Name</th>
@@ -99,11 +117,81 @@ const AppProjects = () => {
               </tr>
             </thead>
             <tbody>
-              {appProjects.map((item) => {
+              {appProjectsForSharePort.map((item) => {
+                return (
+                  <tr key={item.id}>
+                    <td>{item.title}</td>
+                    <td>{item.portType === enums.portType.tcp ? 'tcp' : 'udp'}
+                    </td>
+                    <td>{item.internalPort}</td>
+                    <td>{item.customer.username}</td>
+                    <td>
+                      {item.customer.name} {item.customer.family}
+                    </td>
+                    <td>{dateFormat(item.dateUpdated)}</td>
+                    <td>
+                      <span
+                        className={`ui message ${item.state === enums.projectState.active ? 'green' : 'yellow'
+                          } ${styles.state}`}>
+                        {item.state === enums.projectState.active ? 'Active' : 'Inactive'}
+                      </span>
+                    </td>
+                    <td>
+                      <Link to={`/app-projects/update/${item.id}`} className="circular ui icon button">
+                        <i className="icon edit"></i>
+                      </Link>
+                      <button
+                        className="circular ui icon button red"
+                        onClick={() => onDeleteClicked(item.id)}>
+                        <i className="icon delete"></i>
+                      </button>
+                      {/* <button className="circular ui icon button">
+                          <i className="icon file"></i>
+                        </button> */}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      
+      <div className="row">
+        <div className="four wide column">
+        </div>
+        <div className="twelve wide column right aligned">
+          <div className="ui icon input">
+            <input type="text" placeholder="Search..." data-listener-added_f3844f1b="true" />
+            <i className="circular search link icon"></i>
+          </div>
+        </div>
+      </div>
+      <div className="row">
+        <div className="sixteen wide column">
+          <table className="ui single line table">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>ViewId</th>
+                <th>Port Type</th>
+                <th>Internal Port</th>
+                <th>Username</th>
+                <th>Full Name</th>
+                <th>Update Date</th>
+                <th>State</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {appProjectsForUsePort.map((item) => {
                 return (
                   <tr key={item.id}>
                     <td>{item.title}</td>
                     <td>{item.viewId}</td>
+                    <td>{item.portType === enums.portType.tcp ? 'tcp' : 'udp'}
+                    </td>
                     <td>{item.internalPort}</td>
                     <td>{item.customer.username}</td>
                     <td>

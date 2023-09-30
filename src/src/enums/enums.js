@@ -10,6 +10,10 @@ const enums = {
   projectState: {
     inactive: 0,
     active: 1
+  },
+  portType: {
+    tcp: 0,
+    udp: 1
   }
 };
 

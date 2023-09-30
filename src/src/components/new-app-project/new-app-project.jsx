@@ -7,13 +7,15 @@ import notify from "../../services/notify";
 
 const NewAppProject = () => {
   const [appProjectType, setAppProjectType] = useState("share");
+  const [portType, setPortType] = useState("tcp");
   const [title, setTitle] = useState(""); 
-  const [appProjectViewId, setappProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
+  const [appProjectViewId, setAppProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
   const [internalPort, setInternalPort] = useState("");
   const [state, setState] = useState(true);
   const navigate = useNavigate();
 
   const onAppProjectTypeChanged = ($event) => setAppProjectType($event.target.value);
+  const onPortTypeChanged = ($event) => setPortType($event.target.value);
 
   const onSubmitClicked = ($event) => {
     $event.preventDefault();
@@ -25,6 +27,9 @@ const NewAppProject = () => {
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
+          portType === "tcp"
+            ? enums.portType.tcp
+            : enums.portType.udp,
         internalPort,
         state ? enums.projectState.active : enums.projectState.inactive
       )
@@ -80,7 +85,7 @@ const NewAppProject = () => {
               <div className="ui radio checkbox">
                 <input
                   type="radio"
-                  name="radioGroup"
+                  name="AppProjectType"
                   value="share"
                   onChange={onAppProjectTypeChanged}
                   checked={appProjectType === "share"}
@@ -92,7 +97,7 @@ const NewAppProject = () => {
               <div className="ui radio checkbox">
                 <input
                   type="radio"
-                  name="radioGroup"
+                  name="AppProjectType"
                   value="use"
                   onChange={onAppProjectTypeChanged}
                   checked={appProjectType === "use"}
@@ -110,7 +115,7 @@ const NewAppProject = () => {
                   type="text"
                   placeholder="Project ViewId"
                   value={appProjectViewId}
-                  onChange={($event) => setappProjectViewId($event.target.value)}
+                  onChange={($event) => setAppProjectViewId($event.target.value)}
                 />
               </div>
             )} 
@@ -124,6 +129,30 @@ const NewAppProject = () => {
               />
             </div>
 
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="PortType"
+                  value="tcp"
+                  onChange={onPortTypeChanged}
+                  checked={portType === "tcp"}
+                />
+                <label>TCP</label>
+              </div>
+            </div>
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="PortType"
+                  value="udp"
+                  onChange={onPortTypeChanged}
+                  checked={portType === "udp"}
+                />
+                <label>UDP</label>
+              </div>
+            </div>
             <div className="field">
               <button
                 className={`ui toggle button ${state && "green"}`}
