@@ -17,6 +17,8 @@ COPY ./src/nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY ./certs/server.crt /etc/nginx/server.crt
 COPY ./certs/server.key /etc/nginx/server.key
+COPY ./certs/kub/server.crt /etc/nginx/kub-server.crt
+COPY ./certs/kub/server.key /etc/nginx/kub-server.key
 
 EXPOSE 80
 EXPOSE 443
@@ -26,6 +28,8 @@ RUN apk update && apk add ca-certificates grep netcat-openbsd iputils iproute2
 COPY ./certs/ca.crt /usr/local/share/ca-certificates/ca.crt
 COPY ./certs/server.crt /usr/local/share/ca-certificates/server.crt
 COPY ./certs/server.key /usr/local/share/ca-certificates/server.key
+COPY ./certs/kub/server.crt /usr/local/share/ca-certificates/kub-server.crt
+COPY ./certs/kub/server.key /usr/local/share/ca-certificates/kub-server.key
 COPY ./certs/localhost/ca.crt /usr/local/share/ca-certificates/ca-localhost.crt
 COPY ./certs/localhost/server.crt /usr/local/share/ca-certificates/server-localhost.crt
 COPY ./certs/localhost/server.key /usr/local/share/ca-certificates/server-localhost.key
