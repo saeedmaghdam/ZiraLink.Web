@@ -1,7 +1,7 @@
 const config = {
-  BASE_URL: process.env.REACT_APP_BASE_URL,
-  IDS_URL: process.env.REACT_APP_IDS_URL,
-  DEFAULT_DOMAIN: process.env.REACT_APP_DEFAULT_DOMAIN
+  BASE_URL: 'https://ziralink-api.kub.local',
+  IDS_URL: 'https://ziralink-api.kub.local',
+  DEFAULT_DOMAIN: .kub.local
 };
 
 export default config;
