@@ -1,4 +1,4 @@
-name: Dockerize
+name: Dockerize Localkub
 
 on:
   push:
