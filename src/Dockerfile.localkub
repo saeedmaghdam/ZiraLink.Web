@@ -8,7 +8,7 @@ RUN npm ci --silent
 RUN npm install react-scripts@5.0.1 -g --silent
 RUN npm install dotenv-cli -g --silent
 COPY ./src/. ./
-RUN npm run build-dev
+RUN npm run build-localkub
 
 # production environment
 FROM nginx:stable-alpine

@@ -17,7 +17,8 @@
   },
   "scripts": {
     "start": "set HOST=ziralink.local&&set PORT=4001&&set HTTPS=true&&set SSL_CRT_FILE=server.crt&&set SSL_KEY_FILE=server.key&&react-scripts start",
-    "build": "react-scripts build",
+    "build-dev": "react-scripts build",
+    "build-localkub": "dotenv -e .env.localkub react-scripts build",
     "test": "react-scripts test --passWithNoTests",
     "eject": "react-scripts eject",
     "lint": "eslint .",
