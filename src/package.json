@@ -16,7 +16,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set HOST=ziralink.local&&set PORT=4001&&set HTTPS=true&&set SSL_CRT_FILE=server.crt&&set SSL_KEY_FILE=server.key&&react-scripts start",
+    "start": "set HOST=ziralink.local&&set PORT=4001&&set HTTPS=true&&set SSL_CRT_FILE=../certs/s3d-local-ziralink-server.crt&&set SSL_KEY_FILE=../certs/s3d-local-ziralink-server.key&&react-scripts start",
     "build-dev": "react-scripts build",
     "build-localkub": "dotenv -e .env.localkub react-scripts build",
     "test": "react-scripts test --passWithNoTests",
