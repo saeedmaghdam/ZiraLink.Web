@@ -11,7 +11,7 @@ const UpdateAppProject = () => {
   const [title, setTitle] = useState("");
   const [breadcrumbTitle, setBreadcrumbTitle] = useState('');
   const [appProjectViewId, setAppProjectViewId] = useState("00000000-0000-0000-0000-000000000000");
-  const [internalPort, setInternalPort] = useState("");
+  const [internalPort, setInternalPort] = useState(0);
   const [state, setState] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const UpdateAppProject = () => {
       .getById(id)
       .then((resp) => {
         setAppProjectType(resp.data.appProjectType === enums.appProjectType.share ? 'share' : 'use');
-        setPortType(resp.data.portType === enums.portType.share ? 'tcp' : 'udp');
+        setPortType(resp.data.portType === enums.portType.tcp ? 'tcp' : 'udp');
         setTitle(resp.data.title);
         setBreadcrumbTitle(resp.data.title);
         setAppProjectViewId(resp.data.appProjectViewId);
@@ -49,10 +49,10 @@ const UpdateAppProject = () => {
         appProjectType === "share"
           ? enums.appProjectType.share
           : enums.appProjectType.use,
+          portType === "tcp"
+            ? enums.portType.tcp
+            : enums.portType.udp,
         internalPort,
-        portType === "tcp"
-          ? enums.portType.tcp
-          : enums.portType.udp,
         state ? enums.projectState.active : enums.projectState.inactive
       )
       .then((resData) => {
